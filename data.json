@@ -1,0 +1,9 @@
+{
+  "sales": [120, 200, 150, 300, 250, 400],
+  "months": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
+  "users": [
+    { "id": 1, "name": "علی", "email": "ali@test.com" },
+    { "id": 2, "name": "زهرا", "email": "zahra@test.com" },
+    { "id": 3, "name": "مریم", "email": "maryam@test.com" }
+  ]
+}
