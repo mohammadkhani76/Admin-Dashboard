@@ -74,16 +74,22 @@
     <div class="layout">
       <!-- سایدبار -->
 
-      <main id="main-content">
+      <main class="main" id="main-content">
         <!-- کارت خلاصه -->
-        <section class="cards">
-          <div class="card">فروش امروز: <span id="today-sales">0</span></div>
-          <div class="card">تعداد کاربران: <span id="user-count">0</span></div>
+        <section class="cards" id="cards">
+          <!-- نمایش کارد ها -->
         </section>
 
         <!-- نمودار -->
         <section class="chart">
-          <canvas id="salesChart" width="400" height="200"></canvas>
+          <div class="bar-wrapper">
+            <canvas id="barChart"></canvas>
+            <p>نمودار میله‌ای (Bar Chart)</p>
+          </div>
+          <div class="pie-wrapper">
+            <canvas id="pieChart"></canvas>
+            <p>نمودار دایره‌ای (Pie/Donut Chart)</p>
+          </div>
         </section>
 
         <!-- جدول -->
@@ -162,7 +168,7 @@
             </li>
             <li>
               <a href="#"
-                >گزارشات<svg
+                >گزارشات درآمد<svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -180,7 +186,7 @@
             </li>
             <li>
               <a href="#"
-                >نقشه‌ها<svg
+                >دیدگاه ها<svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -303,6 +309,7 @@
         </aside>
       </div>
     </div>
+    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script1.js"></script>
   </body>

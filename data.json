@@ -1,9 +1,62 @@
 {
-  "sales": [120, 200, 150, 300, 250, 400],
-  "months": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
-  "users": [
-    { "id": 1, "name": "علی", "email": "ali@test.com" },
-    { "id": 2, "name": "زهرا", "email": "zahra@test.com" },
-    { "id": 3, "name": "مریم", "email": "maryam@test.com" }
+  "cards": [
+    {
+      "id": 1,
+      "title": "تعداد کاربران",
+      "count": 10,
+      "percentage": 12,
+      "status": "increase"
+    },
+    {
+      "id": 2,
+      "title": "تعداد سفارش‌ها",
+      "count": 1240,
+      "percentage": -5,
+      "status": "decrease"
+    },
+    {
+      "id": 3,
+      "title": "درآمد",
+      "count": 8750000,
+      "percentage": 8,
+      "status": "increase"
+    },
+    {
+      "id": 4,
+      "title": "دیدگاه‌ها",
+      "count": 380,
+      "percentage": -2,
+      "status": "decrease"
+    }
+  ],
+
+  "chart": {
+    "labels": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
+    "data": [120, 150, 180, 220, 260, 310]
+  },
+
+  "reviews": {
+    "labels": ["راضی", "ناراضی", "بسیار راضی", "بسیار ناراضی"],
+    "data": [180, 80, 100, 20]
+  },
+  "table": [
+    {
+      "id": 1,
+      "name": "کاربر ادمین",
+      "email": "testuser@gmail.com",
+      "role": "ادمین"
+    },
+    {
+      "id": 2,
+      "name": "نازنین محمدخانی",
+      "email": "nazanin.khani2@gmail.com",
+      "role": "کاربر"
+    },
+    {
+      "id": 3,
+      "name": "علی رضایی",
+      "email": "ali.rezaei@gmail.com",
+      "role": "کاربر"
+    }
   ]
 }

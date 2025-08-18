@@ -1,41 +1,69 @@
-const nav = document.querySelector("#nav");
-const sidebarSection = document.querySelector("#sidebar-section");
+async function getDashboardData() {
+  const response = await fetch("./data.json");
+  const data = await response.json();
 
-function updateSidebarOnResize() {
-  if (window.innerWidth >= 768) {
-    sidebarSection.classList.remove("hidden");
-    sidebarSection.classList.remove("mobile-active");
-  } else {
-    sidebarSection.classList.add("hidden");
-    sidebarSection.classList.remove("mobile-active");
-  }
+  const cardsContainer = document.getElementById("cards-container");
+
+  // ساخت کارت‌ها
+  data.cards.forEach((card) => {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+      <h3>${card.title}</h3>
+      <p>${card.count}</p>
+      <div class="card-stats ${
+        card.status === "increase" ? "positive" : "negative"
+      }">
+        ${card.status === "increase" ? "⬆" : "⬇"} ${Math.abs(card.percentage)}%
+      </div>
+    `;
+    cardsContainer.appendChild(div);
+  });
+
+  // بار چارت (میله‌ای)
+  const barCtx = document.getElementById("barChart").getContext("2d");
+  new Chart(barCtx, {
+    type: "bar",
+    data: {
+      labels: data.chart.labels,
+      datasets: [
+        {
+          label: "تعداد سفارش‌ها",
+          data: data.chart.data,
+          backgroundColor: "#3366ff",
+        },
+      ],
+    },
+    options: { responsive: true },
+  });
+
+  // پای چارت (دایره‌ای)
+  const pieCtx = document.getElementById("pieChart").getContext("2d");
+  new Chart(pieCtx, {
+    type: "pie",
+    data: {
+      labels: data.cards.map((c) => c.title),
+      datasets: [
+        {
+          data: data.cards.map((c) => Math.abs(c.percentage)),
+          backgroundColor: ["#3366ff", "#ff5733", "#4caf50", "#f39c12"],
+        },
+      ],
+    },
+    options: { responsive: true },
+  });
+
+  // جدول کاربران
+  const tbody = document.querySelector("#users-table tbody");
+  data.table.forEach((user) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>${user.role}</td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
-// کلیک روی آیکون منو
-nav.addEventListener("click", (e) => {
-  e.stopPropagation(); // جلوگیری از trigger شدن window click
-  if (window.innerWidth >= 768) {
-    sidebarSection.classList.toggle("hidden");
-  } else {
-    sidebarSection.classList.add("mobile-active");
-  }
-});
-
-// جلوگیری از بسته شدن وقتی داخل سایدبار کلیک شد
-sidebarSection.addEventListener("click", (e) => {
-  e.stopPropagation();
-});
-
-// کلیک بیرون از سایدبار در موبایل
-window.addEventListener("click", () => {
-  if (
-    window.innerWidth < 768 &&
-    sidebarSection.classList.contains("mobile-active")
-  ) {
-    sidebarSection.classList.remove("mobile-active");
-  }
-});
-
-// هنگام resize یا load
-window.addEventListener("resize", updateSidebarOnResize);
-updateSidebarOnResize();
+getDashboardData();

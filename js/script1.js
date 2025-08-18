@@ -5,54 +5,17 @@ const mobileNav = document.querySelector("#mobile-nav nav");
 const sidebarDesktop = document.querySelector(".sidebar");
 const sidebarMobile = document.querySelector(".sidebar-nav");
 
-const mainContent = document.querySelector("#main-content");
+const mainContent = document.querySelector(".main");
 const sidebarMobileClose = document.querySelector("#sidebar-close svg");
 const overlay = document.querySelector("#mobile-overlay");
 
+// card
+const cardsContainer = document.querySelector("#cards");
 // // ---------------- کپی کردن منو ----------------
 
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
-// کلیک روی دکمه منو
-// navbarBtn.addEventListener("click", () => {
-//   if (window.innerWidth <= 768) {
-//     // موبایل
-//     sidebarDesktop.classList.add("desktophidden");
-//     mainContent.classList.add("full");
-//     sidebarMobile.classList.remove("mobilehidden");
-//     overlay.classList.add("show");
-//   } else {
-//     // دسکتاپ
-//     sidebarDesktop.classList.toggle("desktophidden");
-//     mainContent.classList.toggle("full");
-//     sidebarMobile.classList.add("mobilehidden");
-//     overlay.classList.remove("show");
-//   }
-// });
-
-// // کلیک روی دکمه بستن موبایل
-// if (sidebarMobileClose) {
-//   sidebarMobileClose.addEventListener("click", () => {
-//     sidebarMobile.classList.add("mobilehidden");
-//     overlay.classList.remove("show");
-//   });
-// }
-
-// // وقتی صفحه resize شد
-// window.addEventListener("resize", () => {
-//   if (window.innerWidth > 768) {
-//     // دسکتاپ
-//     sidebarDesktop.classList.remove("desktophidden"); // دسکتاپ نمایش
-//     sidebarMobile.classList.add("mobilehidden"); // موبایل مخفی
-//     mainContent.classList.remove("full");
-//   } else {
-//     // موبایل
-//     sidebarDesktop.classList.add("desktophidden"); // دسکتاپ مخفی در موبایل
-//     sidebarMobile.classList.add("mobilehidden");
-//     mainContent.classList.remove("full");
-//   }
-// });
 // کلیک روی دکمه منو
 navbarBtn.addEventListener("click", () => {
   if (window.innerWidth <= 768) {
@@ -100,4 +63,123 @@ window.addEventListener("resize", () => {
     sidebarMobile.classList.add("mobilehidden");
     mainContent.classList.remove("full");
   }
+});
+
+// ساخت کارت‌ها
+async function getFetchCards() {
+  try {
+    const response = await fetch("./data.json");
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP ERROR! Status:${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+    cardsContainer.innerHTML = "";
+    data.cards.forEach((card) => {
+      const div = document.createElement("div");
+      div.classList.add("card");
+      // شرط رنگ بر اساس درصد
+      const isPositive = card.percentage >= 0;
+      const percentageClass = isPositive ? "positive" : "negative"; // رنگ بکگراندبر اساس مثبت یا منفی
+
+      // const arrow = isPositive
+      //   ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 4l-8 8h16z"/></svg>`
+      //   : `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 20l8-8H4z"/></svg>`;
+      const arrow = isPositive
+        ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+</svg>
+` // برای قرار دادن فلش بالا و پایین
+        : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
+</svg>
+`;
+      const ordersCountColor = isPositive ? "positive" : "negative"; // تعیین رنگ مقدار count
+
+      div.innerHTML = `
+        <h3>${card.title} </h3>
+            <p class="orders-count ${ordersCountColor}" id="orders-count">${card.count}</p>
+        <div class="card-stats ${percentageClass}">
+              <p class="card-percentage" id="orders-percentage">${card.percentage}%</p>
+        <div class="status">
+              <p class="card-status" id="orders-status">${card.status}</p>
+              ${arrow}
+        </div>
+        </div>`;
+      cardsContainer.appendChild(div);
+    });
+
+    // بار چارت (میله‌ای)
+    const barCtx = document.getElementById("barChart").getContext("2d");
+    new Chart(barCtx, {
+      type: "bar",
+      data: {
+        labels: data.chart.labels,
+        datasets: [
+          {
+            label: " سفارش‌ها",
+            data: data.chart.data,
+            backgroundColor: "#3366ff",
+          },
+        ],
+      },
+      // options: { responsive: true },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true }, // نمایش یا عدم نمایش راهنما
+          title: {
+            display: true,
+            text: " تعداد سفارش ها",
+            font: { size: 18 },
+          },
+        },
+      },
+    });
+    // نمودار دایره ای
+    const pieCtx = document.getElementById("pieChart").getContext("2d");
+    new Chart(pieCtx, {
+      type: "doughnut",
+      data: {
+        labels: data.reviews.labels,
+        datasets: [
+          {
+            label: " دیدگاه ها",
+            data: data.reviews.data,
+            backgroundColor: [
+              "#3366ff",
+              "#4caf50",
+              "#f44336",
+              "#ff9800",
+              "#9c27b0",
+              "#00bcd4",
+            ],
+          },
+        ],
+      },
+      // options: { responsive: true },
+      options: {
+        responsive: true, // باعث میشه با تغییر اندازه کانتینر تغییر کنه
+        maintainAspectRatio: false, // غیرفعال کردن نسبت ابعاد پیش‌فرض
+        plugins: {
+          legend: { display: true }, // نمایش یا عدم نمایش راهنما
+          title: {
+            display: true,
+            text: "دیدگاه های کاربران",
+            font: { size: 18 },
+          },
+        },
+      },
+    });
+    // جدول کاربران
+  } catch (error) {
+    console.error("خطا در دریافت اطلاعات", error);
+  }
+}
+
+// اجرای اولیه
+window.addEventListener("DOMContentLoaded", () => {
+  getFetchCards();
 });
