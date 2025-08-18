@@ -9,11 +9,12 @@
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   height: 100vh;
   background: #f0f2f8;
   font-family: "vazir";
+  max-width: 100%;
 }
 header {
   background: #3366ff;
@@ -75,7 +76,6 @@ header {
 .search-section {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
 }
 form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* سایه ملایم */
@@ -126,35 +126,52 @@ form {
 .layout {
   display: flex;
   width: 100%;
-  background-color: burlywood;
   height: 100vh;
-  justify-content: flex-end;
-  /* overflow-x: hidden; */
-  /* position: relative; */
 }
 
 /* سایدبار */
-.sidebar {
-  background: white;
+/* موبایل */
+.sidebar-nav {
+  background-color: aquamarine;
   padding: 20px;
-  /* position: absolute; */
-  height: 100%;
-  width: 27%;
+  height: 100vh;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  /* overflow-y: auto; */
   box-sizing: border-box;
-  /* transition: all 0.3s ease-in-out; */
-  /* opacity: 1;
-  transform: translateX(0); */
+  transition: all 0.3s ease-in-out;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
-.sidebar.hidden {
+.sidebar-nav.mobilehidden {
   display: none;
-  /* opacity: 0;
-  transform: translateX(100%);  */
 }
+/* دسکتاپ */
+.sidebar {
+  background: white;
+  padding: 20px;
+  height: 100vh;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.sidebar.desktophidden {
+  display: none;
+}
+/* .sidebar-nav {
+  display: none;
+} */
 .sidebar-title {
   display: flex;
   align-items: center;
@@ -165,21 +182,23 @@ form {
   font-weight: bold;
   color: #3366ff;
 }
-
-.sidebar nav {
+.sidebar-title svg {
+  display: none;
+}
+nav {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
-.sidebar svg {
+nav svg {
   width: 20px;
   height: 20px;
 }
 /* .sidebar svg:hover {
   color: black;
 } */
-.sidebar nav ul {
+nav ul {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -188,10 +207,10 @@ form {
   list-style: none;
   padding: 10px;
 }
-.sidebar nav ul:not(:last-child) {
+nav ul:not(:last-child) {
   border-bottom: 1px solid black;
 }
-.sidebar nav ul li {
+nav ul li {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -200,11 +219,11 @@ form {
   cursor: pointer;
   text-align: right;
 }
-.sidebar nav ul li:not(:first-child):hover {
+nav ul li:not(:first-child):hover {
   background-color: #e3f2fc;
   border-radius: 5px;
 }
-.sidebar nav ul li a {
+nav ul li a {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -214,7 +233,7 @@ form {
   color: black;
 }
 
-.sidebar nav ul li a:hover {
+nav ul li a:hover {
   color: #3366ff;
 }
 .section-title {
@@ -223,69 +242,66 @@ form {
 }
 main {
   background-color: #f0f2f8;
+  /* background-color: chocolate; */
+  width: 75%;
+}
+main.full {
   width: 100%;
 }
-/* .cards {
-  display: flex;
-  gap: 15px;
-  margin: 20px;
-}
 
-.card {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.table {
-  margin: 20px;
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 10px;
-  border: 1px solid #ddd;
-} */
-/* حالت موبایل overlay */
-.sidebar.mobile-active {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-  padding: 20px;
-  overflow-y: auto;
-}
-/* --- حالت موبایل --- */
-@media screen and (max-width: 768px) {
-  .logo-img,
-  .logo-title {
-    display: none;
-  } /* لوگو مخفی */
-
+@media screen and (max-width: 1000px) {
   .sidebar {
-    display: none; /* پیش‌فرض مخفی */
-    width: 80%;
-  }
-  .sidebar.mobile-active {
-    display: flex; /* وقتی فعال شد */
+    width: 40%;
   }
   main {
-    background-color: brown;
+    width: 60%;
+    background-color: darkgreen;
+  }
+}
+@media screen and (max-width: 900px) {
+  .sidebar {
+    width: 40%;
+  }
+  main {
+    width: 60%;
+    background-color: darkgreen;
+  }
+}
+@media screen and (max-width: 800px) {
+  body {
+    min-height: 100%;
+  }
+  .logo-title,
+  .logo-img svg {
+    display: none;
+  }
+  .logo-section {
+    justify-content: flex-end;
+  }
+  form {
+    width: 100%;
+    justify-content: center;
+  }
+  .search-section button {
+    width: 20%;
+  }
+  .search-section input {
+    width: 80%;
+  }
+  /* .sidebar {
+    display: none;
+  } */
+  .sidebar-title {
+    justify-content: space-between;
+  }
+  .sidebar-title svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+
+  main {
+    width: 100%;
+    /* background-color: coral; */
   }
 }

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>پنل داشبورد</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style1.css" />
+    <title>Document</title>
   </head>
   <body>
     <!-- هدر بالای صفحه -->
 
     <header>
       <div class="search-section">
-        <div></div>
         <form>
           <input type="text" name="search" id="" placeholder="...جستجو" />
 
@@ -35,7 +35,7 @@
       <div class="logo-section">
         <!-- آیکن منو برای موبایل -->
 
-        <div class="nav-burger" id="nav">
+        <div class="nav-burger" id="navbar-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -74,34 +74,51 @@
     <div class="layout">
       <!-- سایدبار -->
 
-      <main>
+      <main id="main-content">
         <!-- کارت خلاصه -->
-        <!-- <section class="cards">
+        <section class="cards">
           <div class="card">فروش امروز: <span id="today-sales">0</span></div>
           <div class="card">تعداد کاربران: <span id="user-count">0</span></div>
-        </section> -->
+        </section>
 
         <!-- نمودار -->
-        <!-- <section class="chart">
-        <canvas id="salesChart" width="400" height="200"></canvas>
-      </section> -->
+        <section class="chart">
+          <canvas id="salesChart" width="400" height="200"></canvas>
+        </section>
 
         <!-- جدول -->
-        <!-- <section class="table">
-        <h2>لیست کاربران</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>نام</th>
-              <th>ایمیل</th>
-            </tr>
-          </thead>
-          <tbody id="user-table"></tbody>
-        </table>
-      </section> -->
+        <section class="table">
+          <h2>لیست کاربران</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>نام</th>
+                <th>ایمیل</th>
+              </tr>
+            </thead>
+            <tbody id="user-table"></tbody>
+          </table>
+        </section>
       </main>
-      <aside class="sidebar" id="sidebar-section">
-        <div class="sidebar-title">داشبورد کاربر</div>
+      <!-- دسکتاپ -->
+      <aside class="sidebar" id="desktop-nav">
+        <div class="sidebar-title">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+          <p>داشبورد کاربر</p>
+        </div>
         <nav>
           <ul>
             <li class="section-title">صفحات مدیریت</li>
@@ -260,8 +277,31 @@
           </ul>
         </nav>
       </aside>
+
+      <!-- موبایل -->
+      <aside class="sidebar-nav mobilehidden" id="mobile-nav">
+        <div class="sidebar-title" id="sidebar-close">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+          <p>داشبورد کاربر</p>
+        </div>
+        <nav></nav>
+        <!-- تکرار منو دسکتاپ -->
+      </aside>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script1.js"></script>
   </body>
 </html>
