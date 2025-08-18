@@ -10,19 +10,18 @@ const sidebarMobileClose = document.querySelector("#sidebar-close svg");
 // ---------------- کپی کردن منو ----------------
 
 if (desktopNav && mobileNav) {
-  mobileNav.innerHTML = desktopNav.innerHTML; // کپی کردن منو
+  mobileNav.innerHTML = desktopNav.innerHTML;
 } // کلیک روی دکمه منو
 navbarBtn.addEventListener("click", () => {
   if (window.innerWidth <= 768) {
     // موبایل
     sidebarDesktop.classList.add("desktophidden");
     mainContent.classList.add("full");
-
-    sidebarMobile.classList.toggle("mobilehidden");
+    sidebarMobile.classList.remove("mobilehidden");
   } else {
     // دسکتاپ
     sidebarDesktop.classList.toggle("desktophidden");
-    mainContent.classList.add("full");
+    mainContent.classList.toggle("full");
     sidebarMobile.classList.add("mobilehidden");
   }
 });
@@ -35,15 +34,16 @@ if (sidebarMobileClose) {
 }
 
 // وقتی صفحه resize شد
-
 window.addEventListener("resize", () => {
   if (window.innerWidth > 768) {
-    sidebarMobile.classList.add("mobilehidden"); // موبایل همیشه مخفی
-    sidebarDesktop.classList.remove("desktophidden"); // دسکتاپ همیشه نمایش
+    // دسکتاپ
+    sidebarDesktop.classList.remove("desktophidden"); // دسکتاپ نمایش
+    sidebarMobile.classList.add("mobilehidden"); // موبایل مخفی
     mainContent.classList.remove("full");
   } else {
+    // موبایل
     sidebarDesktop.classList.add("desktophidden"); // دسکتاپ مخفی در موبایل
-    sidebarMobile.classList.add("mobilehidden"); // موبایل پیش‌فرض مخفی باشه
+    sidebarMobile.classList.add("mobilehidden");
     mainContent.classList.remove("full");
   }
 });

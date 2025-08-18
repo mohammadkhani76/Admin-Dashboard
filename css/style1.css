@@ -9,12 +9,11 @@
 }
 
 body {
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background: #f0f2f8;
   font-family: "vazir";
-  max-width: 100%;
 }
 header {
   background: #3366ff;
@@ -132,7 +131,7 @@ form {
 /* سایدبار */
 /* موبایل */
 .sidebar-nav {
-  background-color: aquamarine;
+  background-color: white;
   padding: 20px;
   height: 100vh;
   width: 50%;
@@ -146,6 +145,8 @@ form {
   position: fixed;
   right: 0;
   top: 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 .sidebar-nav.mobilehidden {
   display: none;
@@ -169,9 +170,7 @@ form {
 .sidebar.desktophidden {
   display: none;
 }
-/* .sidebar-nav {
-  display: none;
-} */
+
 .sidebar-title {
   display: flex;
   align-items: center;
@@ -195,9 +194,7 @@ nav svg {
   width: 20px;
   height: 20px;
 }
-/* .sidebar svg:hover {
-  color: black;
-} */
+
 nav ul {
   display: flex;
   align-items: center;
@@ -242,7 +239,6 @@ nav ul li a:hover {
 }
 main {
   background-color: #f0f2f8;
-  /* background-color: chocolate; */
   width: 75%;
 }
 main.full {
@@ -255,7 +251,6 @@ main.full {
   }
   main {
     width: 60%;
-    background-color: darkgreen;
   }
 }
 @media screen and (max-width: 900px) {
@@ -264,13 +259,9 @@ main.full {
   }
   main {
     width: 60%;
-    background-color: darkgreen;
   }
 }
 @media screen and (max-width: 800px) {
-  body {
-    min-height: 100%;
-  }
   .logo-title,
   .logo-img svg {
     display: none;
@@ -288,9 +279,7 @@ main.full {
   .search-section input {
     width: 80%;
   }
-  /* .sidebar {
-    display: none;
-  } */
+
   .sidebar-title {
     justify-content: space-between;
   }
@@ -302,6 +291,5 @@ main.full {
 
   main {
     width: 100%;
-    /* background-color: coral; */
   }
 }
