@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="pic/ico.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Document</title>
+    <title>داشبورد</title>
   </head>
   <body>
     <!-- هدر بالای صفحه -->
-
     <header>
       <div class="search-section">
         <form>
@@ -71,16 +71,17 @@
         </div>
       </div>
     </header>
+    <!-- سایدبار / main -->
     <div class="layout">
       <!-- main -->
-
       <main class="main" id="main-content">
-        <!-- کارت خلاصه -->
+        <!-- کارت ها -->
+
         <section class="cards" id="cards">
-          <!-- نمایش کارد ها -->
+          <!-- نمایش کارت ها -->
         </section>
 
-        <!-- نمودار -->
+        <!-- چارت تعداد سفارش ها -->
         <section class="chart">
           <div class="bar-wrapper">
             <canvas id="barChart"></canvas>
@@ -92,7 +93,7 @@
           </div>
         </section>
 
-        <!-- جدول -->
+        <!--  جدول لیست کاربران  -->
         <section class="table-section">
           <h2>لیست کاربران</h2>
           <div class="scrolldiv">
@@ -111,21 +112,27 @@
             </table>
           </div>
         </section>
-        <!-- درامد -->
+
+        <!--چارت درامد -->
         <section class="income-chart">
+          <!-- نمودار خطی -->
           <div class="line-wrapper">
             <canvas id="lineChart"></canvas>
             <p>(Line Chart) نمودار خطی</p>
           </div>
+
+          <!-- نمودار افقی -->
           <div class="horizontal-bar-wrapper">
             <canvas id="horizontalBarChart"></canvas>
             <p>(Horizontal Bar) نمودار میله‌ای افقی</p>
           </div>
         </section>
       </main>
+
       <!-- سایدبار -->
       <!-- دسکتاپ -->
       <aside class="sidebar" id="desktop-nav">
+        <!-- هدر سایدبار -->
         <div class="sidebar-title">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -143,10 +150,11 @@
           </svg>
           <p>داشبورد کاربر</p>
         </div>
+        <!-- لیست سایدبار -->
         <nav>
+          <!-- >صفحات مدیریت -->
           <ul>
             <li class="section-title">صفحات مدیریت</li>
-
             <li>
               <a href="#"
                 >داشبورد
@@ -227,6 +235,7 @@
             </li>
           </ul>
 
+          <!-- (Analytics / Charts) بخش تحلیلی و نمودار -->
           <ul>
             <li class="section-title">
               (Analytics / Charts) بخش تحلیلی و نمودار
@@ -281,9 +290,9 @@
             </li>
           </ul>
 
+          <!-- (Settings) بخش تنظیمات -->
           <ul>
             <li class="section-title">(Settings) بخش تنظیمات</li>
-
             <li>
               <a href="./login.html"
                 >تنظیمات پروفایل
@@ -313,8 +322,10 @@
       </aside>
 
       <!-- موبایل -->
+      <!-- overlay -->
       <div id="mobile-overlay" class="mobilehidden">
         <aside class="sidebar-nav mobilehidden" id="mobile-nav">
+          <!-- هدر سایدبار -->
           <div class="sidebar-title" id="sidebar-close">
             <svg
               xmlns="http://www.w3.org/2000/svg"
