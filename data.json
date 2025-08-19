@@ -42,21 +42,41 @@
   "table": [
     {
       "id": 1,
-      "name": "کاربر ادمین",
+      "name": "ادمین",
       "email": "testuser@gmail.com",
-      "role": "ادمین"
+      "role": "ادمین",
+      "phone": "091212254896"
     },
+
     {
       "id": 2,
-      "name": "نازنین محمدخانی",
-      "email": "nazanin.khani2@gmail.com",
-      "role": "کاربر"
-    },
-    {
-      "id": 3,
       "name": "علی رضایی",
       "email": "ali.rezaei@gmail.com",
-      "role": "کاربر"
+      "role": "کاربر",
+      "phone": "09125632147"
+    },
+
+    {
+      "id": 3,
+      "name": "فاطمه کریمی",
+      "email": "fatemeh.karimi@gmail.com",
+      "role": "کاربر",
+      "phone": "09122334455"
+    },
+    {
+      "id": 4,
+      "name": "رضا احمدی",
+      "email": "reza.ahmadi@gmail.com",
+      "role": "ادمین",
+      "phone": "09121234567"
+    },
+
+    {
+      "id": 5,
+      "name": "لیلا رضایی",
+      "email": "leila.rezaei@gmail.com",
+      "role": "نویسنده",
+      "phone": "09126789012"
     }
   ]
 }

@@ -11,6 +11,8 @@ const overlay = document.querySelector("#mobile-overlay");
 
 // card
 const cardsContainer = document.querySelector("#cards");
+// table
+const userTable = document.querySelector("#user-table");
 // // ---------------- کپی کردن منو ----------------
 
 if (desktopNav && mobileNav) {
@@ -18,7 +20,7 @@ if (desktopNav && mobileNav) {
 }
 // کلیک روی دکمه منو
 navbarBtn.addEventListener("click", () => {
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 800) {
     // موبایل
     sidebarDesktop.classList.add("desktophidden");
     mainContent.classList.add("full");
@@ -51,7 +53,7 @@ overlay.addEventListener("click", (e) => {
 
 // وقتی صفحه resize شد
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) {
+  if (window.innerWidth > 800) {
     // دسکتاپ
     sidebarDesktop.classList.remove("desktophidden");
     sidebarMobile.classList.add("mobilehidden");
@@ -174,10 +176,26 @@ async function getFetchCards() {
       },
     });
     // جدول کاربران
+    userTable.innerHTML = "";
+    data.table.forEach((user) => {
+      const userData = `<tr>
+                  <td> ${user.name}</td>
+                  <td>${user.email}</td>
+                  <td>${user.phone}</td>
+                  <td>${user.role}</td>
+                </tr>`;
+      userTable.innerHTML += userData;
+    });
   } catch (error) {
     console.error("خطا در دریافت اطلاعات", error);
   }
 }
+// قرار گرفتن فلش
+document.querySelectorAll("nav ul li").forEach((li) => {
+  if (li.querySelector("ul")) {
+    li.classList.add("dropdown"); // فقط به اونایی که ul داخلشون هست کلاس بده
+  }
+});
 
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
