@@ -186,6 +186,67 @@ async function getFetchCards() {
       </tr>`;
       userTable.innerHTML += userData;
     });
+
+    //  نمودار خطی چارت درامد
+    const incomeCtx = document.getElementById("lineChart").getContext("2d");
+    new Chart(incomeCtx, {
+      type: "line",
+      data: {
+        labels: data.income.chart.labels, // محور X
+        datasets: [
+          {
+            label: "درآمد ماهیانه (تومان)",
+            data: data.income.chart.data, // محور Y
+            borderColor: "#3366ff",
+            backgroundColor: "rgba(51,102,255,0.2)",
+            tension: 0.4,
+            fill: true,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" },
+          title: { display: true, text: "نمودار درآمد ماهیانه" },
+        },
+        scales: {
+          y: { beginAtZero: false },
+        },
+      },
+    });
+    // پس از بارگذاری دیتا
+    const horizontalBarCtx = document
+      .getElementById("horizontalBarChart")
+      .getContext("2d");
+    new Chart(horizontalBarCtx, {
+      type: "bar", // نوع بار
+      data: {
+        labels: data.income.chart.labels, // ["فروردین", "اردیبهشت", ...]
+        datasets: [
+          {
+            label: "درآمد ماهیانه (تومان)",
+            data: data.income.chart.data, // [1200000, 1500000, ...]
+            backgroundColor: "#4caf50",
+          },
+        ],
+      },
+      options: {
+        indexAxis: "y", // کلید برای افقی کردن میله‌ها
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          title: {
+            display: true,
+            text: "درآمد ماهیانه ",
+            font: { size: 16 },
+          },
+        },
+        scales: {
+          x: { beginAtZero: true },
+        },
+      },
+    });
   } catch (error) {
     console.error("خطا در دریافت اطلاعات", error);
   }

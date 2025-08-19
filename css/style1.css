@@ -311,6 +311,7 @@ nav ul li ul li:hover {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 10px 0px;
 }
 .main.full {
   width: 100%;
@@ -394,20 +395,26 @@ nav ul li ul li:hover {
   width: 100%;
   display: flex;
   padding: 10px;
+  justify-content: center;
+  gap: 20px;
 }
 .chart p {
   text-align: center;
 }
 .bar-wrapper,
 .pie-wrapper {
-  width: 50%;
+  width: 45%;
   height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  padding: 30px;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 10px;
 }
 .bar-wrapper canvas,
 .pie-wrapper canvas {
@@ -423,6 +430,10 @@ nav ul li ul li:hover {
   gap: 10px;
   padding: 10px;
 }
+.table-section h2 {
+  color: #666666;
+}
+
 /* دیوی که حاوی جدول است */
 .scrolldiv {
   width: 100%;
@@ -435,10 +446,17 @@ nav ul li ul li:hover {
   margin: 0 auto;
   overflow: hidden;
   width: 70%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 th {
   background-color: #3366ff;
   color: white;
+}
+td {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: #e3f2fc;
 }
 table,
 th,
@@ -448,6 +466,43 @@ td {
   padding: 10px;
   text-align: center;
 }
+/* نمودار خطی */
+.income-chart {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+  padding: 10px;
+}
+.line-wrapper {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.horizontal-bar-wrapper {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1000px) {
   .sidebar {
     width: 40%;
@@ -499,12 +554,18 @@ td {
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
-  .chart {
+  .chart,
+  .income-chart {
     flex-direction: column;
     gap: 30px;
   }
   .bar-wrapper,
-  .pie-wrapper {
+  .pie-wrapper,
+  .line-wrapper,
+  .horizontal-bar-wrapper {
+    width: 100%;
+  }
+  .table-section table {
     width: 100%;
   }
 }
