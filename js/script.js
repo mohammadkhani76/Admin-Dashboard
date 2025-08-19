@@ -1,23 +1,24 @@
 const navbarBtn = document.querySelector("#navbar-btn");
 const desktopNav = document.querySelector("#desktop-nav nav");
 const mobileNav = document.querySelector("#mobile-nav nav");
-
+// سایدبار
 const sidebarDesktop = document.querySelector(".sidebar");
 const sidebarMobile = document.querySelector(".sidebar-nav");
-
 const mainContent = document.querySelector(".main");
 const sidebarMobileClose = document.querySelector("#sidebar-close svg");
 const overlay = document.querySelector("#mobile-overlay");
 
 // card
 const cardsContainer = document.querySelector("#cards");
+
 // table
 const userTable = document.querySelector("#user-table");
-// // ---------------- کپی کردن منو ----------------
 
+// ---------------- کپی کردن منو ----------------
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
+
 // کلیک روی دکمه منو
 navbarBtn.addEventListener("click", () => {
   if (window.innerWidth <= 800) {
@@ -85,20 +86,16 @@ async function getFetchCards() {
       const isPositive = card.percentage >= 0;
       const percentageClass = isPositive ? "positive" : "negative"; // رنگ بکگراندبر اساس مثبت یا منفی
 
-      // const arrow = isPositive
-      //   ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 4l-8 8h16z"/></svg>`
-      //   : `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12 20l8-8H4z"/></svg>`;
+      // برای قرار دادن فلش بالا و پایین
       const arrow = isPositive
         ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-</svg>
-` // برای قرار دادن فلش بالا و پایین
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+        </svg>`
         : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
-</svg>
-`;
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
+        </svg>`;
       const ordersCountColor = isPositive ? "positive" : "negative"; // تعیین رنگ مقدار count
-
+      // جایگذاری کارت ها
       div.innerHTML = `
         <h3>${card.title} </h3>
             <p class="orders-count ${ordersCountColor}" id="orders-count">${card.count}</p>
@@ -140,6 +137,7 @@ async function getFetchCards() {
         },
       },
     });
+
     // نمودار دایره ای
     const pieCtx = document.getElementById("pieChart").getContext("2d");
     new Chart(pieCtx, {
@@ -175,6 +173,7 @@ async function getFetchCards() {
         },
       },
     });
+
     // جدول کاربران
     userTable.innerHTML = "";
     data.table.forEach((user) => {
@@ -215,7 +214,8 @@ async function getFetchCards() {
         },
       },
     });
-    // پس از بارگذاری دیتا
+
+    // نمودار افقی چارت درامد
     const horizontalBarCtx = document
       .getElementById("horizontalBarChart")
       .getContext("2d");
@@ -251,7 +251,8 @@ async function getFetchCards() {
     console.error("خطا در دریافت اطلاعات", error);
   }
 }
-// قرار گرفتن فلش
+
+//لیست منو قرار گرفتن فلش
 document.querySelectorAll("nav ul li").forEach((li) => {
   if (li.querySelector("ul")) {
     li.classList.add("dropdown"); // فقط به اونایی که ul داخلشون هست کلاس بده
