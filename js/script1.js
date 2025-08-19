@@ -179,11 +179,11 @@ async function getFetchCards() {
     userTable.innerHTML = "";
     data.table.forEach((user) => {
       const userData = `<tr>
-                  <td> ${user.name}</td>
-                  <td>${user.email}</td>
-                  <td>${user.phone}</td>
-                  <td>${user.role}</td>
-                </tr>`;
+      <td>${user.role}</td>
+      <td>${user.email}</td>
+      <td>${user.phone}</td>
+      <td> ${user.name}</td>
+      </tr>`;
       userTable.innerHTML += userData;
     });
   } catch (error) {
