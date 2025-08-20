@@ -117,28 +117,44 @@ async function getFetchCards() {
         labels: data.chart.labels,
         datasets: [
           {
-            label: " سفارش‌ها",
+            label: "سفارش‌ها",
             data: data.chart.data,
             backgroundColor: "#3366ff",
           },
         ],
       },
-      // options: { responsive: true },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: true }, // نمایش یا عدم نمایش راهنما
+          legend: {
+            display: true,
+            labels: {
+              font: { family: "vazir", size: 14 }, // فونت Legend
+            },
+          },
           title: {
             display: true,
-            text: " تعداد سفارش ها",
-            font: { size: 18 },
+            text: "تعداد سفارش‌ها",
+            font: { size: 16, family: "vazir" }, // فونت Title
+          },
+          tooltip: {
+            bodyFont: { family: "vazir", size: 14 }, // فونت Tooltip
+            titleFont: { family: "vazir", size: 14 },
+          },
+        },
+        scales: {
+          x: {
+            ticks: { font: { family: "vazir", size: 14 } }, // فونت محور X
+          },
+          y: {
+            ticks: { font: { family: "vazir", size: 14 } }, // فونت محور Y
           },
         },
       },
     });
 
-    // نمودار دایره ای
+    // نمودار دایره‌ای
     const pieCtx = document.getElementById("pieChart").getContext("2d");
     new Chart(pieCtx, {
       type: "doughnut",
@@ -146,7 +162,7 @@ async function getFetchCards() {
         labels: data.reviews.labels,
         datasets: [
           {
-            label: " دیدگاه ها",
+            label: "دیدگاه‌ها",
             data: data.reviews.data,
             backgroundColor: [
               "#3366ff",
@@ -159,21 +175,26 @@ async function getFetchCards() {
           },
         ],
       },
-      // options: { responsive: true },
       options: {
-        responsive: true, // باعث میشه با تغییر اندازه کانتینر تغییر کنه
-        maintainAspectRatio: false, // غیرفعال کردن نسبت ابعاد پیش‌فرض
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
-          legend: { display: true }, // نمایش یا عدم نمایش راهنما
+          legend: {
+            display: true,
+            labels: { font: { family: "vazir", size: 14 } },
+          },
           title: {
             display: true,
-            text: "دیدگاه های کاربران",
-            font: { size: 18 },
+            text: "دیدگاه‌های کاربران",
+            font: { size: 16, family: "vazir" },
+          },
+          tooltip: {
+            bodyFont: { family: "vazir", size: 14 },
+            titleFont: { family: "vazir", size: 14 },
           },
         },
       },
     });
-
     // جدول کاربران
     userTable.innerHTML = "";
     data.table.forEach((user) => {
@@ -206,11 +227,26 @@ async function getFetchCards() {
       options: {
         responsive: true,
         plugins: {
-          legend: { position: "top" },
-          title: { display: true, text: "نمودار درآمد ماهیانه" },
+          legend: {
+            position: "top",
+            labels: { font: { size: 14, family: "vazir" } },
+          },
+          title: {
+            display: true,
+            text: "نمودار درآمد ماهیانه",
+            font: { size: 16, family: "vazir" },
+          },
         },
         scales: {
-          y: { beginAtZero: false },
+          x: {
+            ticks: { font: { family: "vazir", size: 12 } },
+          },
+          y: {
+            beginAtZero: false,
+            ticks: {
+              font: { size: 14, family: "vazir" },
+            },
+          },
         },
       },
     });
@@ -235,15 +271,34 @@ async function getFetchCards() {
         indexAxis: "y", // کلید برای افقی کردن میله‌ها
         responsive: true,
         plugins: {
-          legend: { display: true },
+          legend: {
+            display: true,
+            labels: { font: { family: "vazir", size: 14 } },
+          },
           title: {
             display: true,
             text: "درآمد ماهیانه ",
-            font: { size: 16 },
+            font: { size: 16, family: "vazir" },
+          },
+          tooltip: {
+            titleFont: { family: "vazir", size: 14 },
+            bodyFont: { family: "vazir", size: 12 },
           },
         },
+
         scales: {
-          x: { beginAtZero: true },
+          x: {
+            beginAtZero: true,
+            ticks: {
+              font: { size: 12, family: "vazir" },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              font: { size: 12, family: "vazir" },
+            },
+          },
         },
       },
     });
