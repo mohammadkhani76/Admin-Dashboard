@@ -31,6 +31,59 @@ header {
   align-items: center;
   gap: 20px;
 }
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+.user-title {
+  cursor: pointer;
+}
+.user-icon {
+  width: 40px;
+  height: 40px;
+}
+.user-logout {
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  background-color: #e3f2fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  z-index: 1;
+  padding: 0.5rem;
+  border: 1px solid rgba(58, 61, 66, 0.06);
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: white;
+}
+.user-logout.hidden {
+  display: none;
+}
+.user-logout button {
+  background-color: transparent;
+  padding: 10px 20px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #3366ff;
+}
+.user-logout > button > svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+.user-logout > button:hover {
+  color: #c90000;
+  cursor: pointer;
+}
 /* logo */
 .logo-img {
   display: flex;
@@ -38,11 +91,7 @@ header {
   justify-content: center;
   gap: 10px;
 }
-/* .logo-img img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-} */
+
 .logo-img p {
   color: white;
   font-size: 1.5rem;
@@ -282,20 +331,22 @@ nav ul li a:hover {
 }
 
 /* دراپ */
-nav ul li ul {
+nav > ul > li > ul {
   display: none;
   padding-right: 20px;
   width: 100%;
   box-sizing: border-box;
 }
+
 nav ul li:hover > ul {
   display: flex;
   gap: 10px;
 }
 
-nav ul li ul li {
+nav > ul > li > ul > li {
   width: 100%;
   padding: 2px;
+  margin-right: 2px;
 }
 
 nav ul li ul li:hover {
@@ -306,7 +357,6 @@ nav ul li ul li:hover {
 /* main */
 .main {
   background-color: #f0f2f8;
-  /* background-color: burlywood; */
   width: 75%;
   display: flex;
   flex-direction: column;
@@ -368,7 +418,6 @@ nav ul li ul li:hover {
   height: 30px;
 }
 .card-stats {
-  /* background-color: cornflowerblue; */
   padding: 10px;
   border-radius: 0px 0px 8px 8px;
   text-align: center;
@@ -399,6 +448,7 @@ nav ul li ul li:hover {
 }
 .chart p {
   text-align: center;
+  font-size: 1rem;
 }
 .bar-wrapper,
 .pie-wrapper {
@@ -501,7 +551,9 @@ td {
   border-radius: 10px;
   cursor: pointer;
 }
-
+.horizontal-bar-wrapper p {
+  font-size: 1rem;
+}
 @media screen and (max-width: 1000px) {
   .sidebar {
     width: 40%;
@@ -509,22 +561,30 @@ td {
   .main {
     width: 60%;
   }
-}
-@media screen and (max-width: 900px) {
-  .sidebar {
-    width: 40%;
+
+  .chart,
+  .income-chart {
+    flex-direction: column;
+    gap: 30px;
   }
-  .main {
-    width: 60%;
+  .bar-wrapper,
+  .pie-wrapper,
+  .line-wrapper,
+  .horizontal-bar-wrapper {
+    width: 100%;
   }
 }
+
 @media screen and (max-width: 800px) {
-  .logo-title,
-  .logo-img svg {
+  .user-icon {
     display: none;
   }
   .logo-section {
-    justify-content: flex-end;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+  .user-logout {
+    left: -100%;
   }
   form {
     width: 100%;
@@ -553,23 +613,21 @@ td {
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
-  .chart,
-  .income-chart {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .bar-wrapper,
-  .pie-wrapper,
-  .line-wrapper,
-  .horizontal-bar-wrapper {
-    width: 100%;
-  }
-  .table-section table {
-    width: 100%;
-  }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .cards {
     grid-template-columns: repeat(1, 1fr);
+  }
+  header {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 10px;
+  }
+  .logo-section {
+    justify-content: flex-start;
+    /* flex-direction: row-reverse; */
+  }
+  .search-section {
+    order: 2;
   }
 }

@@ -7,8 +7,12 @@ const sidebarMobile = document.querySelector(".sidebar-nav");
 const mainContent = document.querySelector(".main");
 const sidebarMobileClose = document.querySelector("#sidebar-close svg");
 const overlay = document.querySelector("#mobile-overlay");
+// پروفایل
+const userTitle = document.querySelector("#user-title");
+const userLogout = document.querySelector("#user-logout");
+const logoutButton = document.querySelector("#logout-button");
 
-// card
+// car
 const cardsContainer = document.querySelector("#cards");
 
 // table
@@ -17,6 +21,24 @@ const userTable = document.querySelector("#user-table");
 // ---------------- کپی کردن منو ----------------
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
+}
+// --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
+function manageAuth() {
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("loggedUser");
+  if (token) {
+    userTitle.textContent = `${username}`;
+  }
+  // نام کاربری
+  userTitle.addEventListener("click", () => {
+    userLogout.classList.toggle("hidden");
+  });
+  // دکمه خروج
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("loggedUser");
+    location.reload();
+  });
 }
 
 // کلیک روی دکمه منو
@@ -68,7 +90,7 @@ window.addEventListener("resize", () => {
   }
 });
 
-// ساخت کارت‌ها
+// =====ساخت کارت‌ها=====
 async function getFetchCards() {
   try {
     const response = await fetch("./data.json");
@@ -317,4 +339,5 @@ document.querySelectorAll("nav ul li").forEach((li) => {
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
   getFetchCards();
+  manageAuth();
 });
