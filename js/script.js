@@ -22,23 +22,46 @@ const userTable = document.querySelector("#user-table");
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
+// بررسی نمایش پنل به کاربر
+function checkAuth() {
+  const token = localStorage.getItem("token");
+  const navbarLinks = document.querySelectorAll("nav ul li a");
+
+  if (!token) {
+    // اگر کاربر لاگین نکرده
+    mainContent.innerHTML = `
+    <p class="islogin">
+  <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
+</p>`;
+
+    // غیر فعال کردن لینک‌های منو
+    navbarLinks.forEach((link) => {
+      link.classList.add("disabled");
+      link.addEventListener("click", (e) => e.preventDefault());
+    });
+  }
+}
 // --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
 function manageAuth() {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("loggedUser");
   if (token) {
     userTitle.textContent = `${username}`;
+    // نام کاربری
+    userTitle.addEventListener("click", () => {
+      userLogout.classList.toggle("hidden");
+    });
+    // دکمه خروج
+    logoutButton.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedUser");
+      location.reload();
+    });
+  } else {
+    userTitle.addEventListener("click", () => {
+      userLogout.classList.add("hidden");
+    });
   }
-  // نام کاربری
-  userTitle.addEventListener("click", () => {
-    userLogout.classList.toggle("hidden");
-  });
-  // دکمه خروج
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedUser");
-    location.reload();
-  });
 }
 
 // کلیک روی دکمه منو
@@ -89,7 +112,12 @@ window.addEventListener("resize", () => {
     mainContent.classList.remove("full");
   }
 });
-
+// عدم نمایش دکمه خروج
+window.addEventListener("click", (e) => {
+  if (!userLogout.contains(e.target) && !userTitle.contains(e.target)) {
+    userLogout.classList.add("hidden");
+  }
+});
 // ساخت کارت ها و چارت ها
 async function getFetchCards() {
   try {
@@ -353,5 +381,6 @@ document.querySelectorAll("nav ul li").forEach((li) => {
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
   getFetchCards();
+  checkAuth();
   manageAuth();
 });

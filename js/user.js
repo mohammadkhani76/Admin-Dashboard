@@ -28,17 +28,21 @@ function manageAuth() {
   const username = localStorage.getItem("loggedUser");
   if (token) {
     userTitle.textContent = `${username}`;
+    // نام کاربری
+    userTitle.addEventListener("click", () => {
+      userLogout.classList.toggle("hidden");
+    });
+    // دکمه خروج
+    logoutButton.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedUser");
+      location.reload();
+    });
+  } else {
+    userTitle.addEventListener("click", () => {
+      userLogout.classList.add("hidden");
+    });
   }
-  // نام کاربری
-  userTitle.addEventListener("click", () => {
-    userLogout.classList.toggle("hidden");
-  });
-  // دکمه خروج
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedUser");
-    location.reload();
-  });
 }
 
 // کلیک روی دکمه منو
