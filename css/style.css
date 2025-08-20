@@ -497,6 +497,7 @@ nav ul li ul li:hover {
   overflow: hidden;
   width: 70%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-collapse: collapse;
 }
 th {
   background-color: #3366ff;
@@ -508,14 +509,16 @@ td {
 tbody tr:hover {
   background-color: #e3f2fc;
 }
-table,
+
 th,
 td {
-  border: 1px solid blue;
-  border-collapse: collapse;
-  padding: 10px;
+  border-bottom: 1px solid blue;
+
+  padding: 8px;
   text-align: center;
+  white-space: nowrap;
 }
+
 /* نمودار خطی */
 .income-chart {
   display: flex;
@@ -553,6 +556,32 @@ td {
 }
 .horizontal-bar-wrapper p {
   font-size: 1rem;
+}
+/* دکمه صفحه کاربران */
+.td-setting {
+  display: flex; /* کنار هم */
+  justify-content: center; /* وسط‌چین افقی */
+  align-items: center; /* وسط‌چین عمودی */
+  gap: 8px;
+}
+.table-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "vazir";
+}
+.table-btn:hover {
+  transform: scale(0.98);
+}
+.delete-btn {
+  background-color: red;
+}
+.edit-btn {
+  background-color: green;
 }
 @media screen and (max-width: 1000px) {
   .sidebar {

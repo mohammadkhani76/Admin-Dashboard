@@ -1,86 +1,119 @@
 {
-  "cards": [
-    {
-      "id": 1,
-      "title": "تعداد کاربران",
-      "count": 10,
-      "percentage": 12,
-      "status": "increase"
-    },
-    {
-      "id": 2,
-      "title": "تعداد سفارش‌ها",
-      "count": 1240,
-      "percentage": -5,
-      "status": "decrease"
-    },
-    {
-      "id": 3,
-      "title": "درآمد",
-      "count": 8750000,
-      "percentage": 8,
-      "status": "increase"
-    },
-    {
-      "id": 4,
-      "title": "دیدگاه‌ها",
-      "count": 380,
-      "percentage": -2,
-      "status": "decrease"
-    }
-  ],
-
-  "chart": {
-    "labels": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
-    "data": [120, 150, 180, 220, 260, 310]
-  },
-  "income": {
+  "dashboard": {
+    "cards": [
+      {
+        "id": "1",
+        "title": "تعداد کاربران",
+        "count": 10,
+        "percentage": 12,
+        "status": "increase"
+      },
+      {
+        "id": "2",
+        "title": "تعداد سفارش‌ها",
+        "count": 1240,
+        "percentage": -5,
+        "status": "decrease"
+      },
+      {
+        "id": "3",
+        "title": "درآمد",
+        "count": 8750000,
+        "percentage": 8,
+        "status": "increase"
+      },
+      {
+        "id": "4",
+        "title": "دیدگاه‌ها",
+        "count": 380,
+        "percentage": -2,
+        "status": "decrease"
+      }
+    ],
     "chart": {
       "labels": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
-      "data": [5000000, 6000000, 5500000, 7000000, 7500000, 8000000]
+      "data": [120, 150, 180, 220, 260, 310]
+    },
+    "income": {
+      "chart": {
+        "labels": ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"],
+        "data": [5000000, 6000000, 5500000, 7000000, 7500000, 8000000]
+      }
+    },
+    "reviews": {
+      "labels": ["راضی", "ناراضی", "بسیار راضی", "بسیار ناراضی"],
+      "data": [180, 80, 100, 20]
     }
-  },
-  "reviews": {
-    "labels": ["راضی", "ناراضی", "بسیار راضی", "بسیار ناراضی"],
-    "data": [180, 80, 100, 20]
   },
   "table": [
     {
-      "id": 1,
+      "id": "1",
       "name": "ادمین",
       "email": "testuser@gmail.com",
       "role": "ادمین",
       "phone": "091212254896"
     },
-
     {
-      "id": 2,
-      "name": "علی رضایی",
-      "email": "ali.rezaei@gmail.com",
-      "role": "کاربر",
-      "phone": "09125632147"
-    },
-
-    {
-      "id": 3,
+      "id": "2",
       "name": "فاطمه کریمی",
       "email": "fatemeh.karimi@gmail.com",
       "role": "کاربر",
       "phone": "09122334455"
     },
     {
-      "id": 4,
+      "id": "3",
       "name": "رضا احمدی",
       "email": "reza.ahmadi@gmail.com",
       "role": "ادمین",
       "phone": "09121234567"
     },
-
     {
-      "id": 5,
-      "name": "لیلا رضایی",
-      "email": "leila.rezaei@gmail.com",
-      "role": "نویسنده",
+      "id": "4",
+      "name": "سارا موسوی",
+      "email": "sara.mousavi@gmail.com",
+      "role": "کاربر",
+      "phone": "09123456789"
+    },
+    {
+      "id": "5",
+      "name": "علی رضایی",
+      "email": "ali.rezaei@gmail.com",
+      "role": "کاربر",
+      "phone": "09129876543"
+    },
+    {
+      "id": "6",
+      "name": "مریم حسینی",
+      "email": "maryam.hosseini@gmail.com",
+      "role": "کاربر",
+      "phone": "09122334466"
+    },
+    {
+      "id": "7",
+      "name": "کامران صادقی",
+      "email": "kamran.sadeghi@gmail.com",
+      "role": "ادمین",
+      "phone": "09123412345"
+    },
+    {
+      "id": "8",
+      "name": "نگار احمدی",
+      "email": "negar.ahmadi@gmail.com",
+      "role": "کاربر",
+      "phone": "09121239876"
+    },
+    {
+      "id": "9",
+      "name": "امیر رضایی",
+      "email": "amir.rezaei@gmail.com",
+      "role": "کاربر",
+      "phone": "09125678901"
+    },
+    {
+      "id": "10",
+      "name": "لیلا کریمی",
+      "email": "leila.karimi@gmail.com",
+      "role": "کاربر",
       "phone": "09126789012"
     }
   ]
