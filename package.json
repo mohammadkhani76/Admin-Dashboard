@@ -1,0 +1,14 @@
+{
+  "name": "food-store-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env PORT=$PORT json-server --watch data.json --port $PORT"
+  },
+  "dependencies": {
+    "json-server": "^0.17.3"
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0"
+  }
+}
