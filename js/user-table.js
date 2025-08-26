@@ -22,6 +22,25 @@ const userTable = document.querySelector("#user-table");
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
+// بررسی نمایش پنل به کاربر
+function checkAuth() {
+  const token = localStorage.getItem("token");
+  // const navbarLinks = document.querySelectorAll("nav ul li a");
+
+  if (!token) {
+    // اگر کاربر لاگین نکرده
+    mainContent.innerHTML = `
+    <p class="islogin">
+  <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
+</p>`;
+
+    // غیر فعال کردن لینک‌های منو
+    // navbarLinks.forEach((link) => {
+    //   link.classList.add("disabled");
+    //   link.addEventListener("click", (e) => e.preventDefault());
+    // });
+  }
+}
 // --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
 function manageAuth() {
   const token = localStorage.getItem("token");
@@ -94,65 +113,54 @@ window.addEventListener("resize", () => {
   }
 });
 
-// ساخت کارت ها و چارت ها
-async function getFetchCards() {
+//  ساخت جدول کاربران
+// ساخت جدول کاربران
+async function getUserTable() {
   try {
     const response = await fetch(
-      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/dashboard"
+      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table"
     );
-    console.log(response);
-    if (!response.ok) {
-      throw new Error(`HTTP ERROR! Status:${response.status}`);
-    }
+    if (!response.ok) throw new Error(`HTTP ERROR! Status: ${response.status}`);
     const data = await response.json();
     console.log(data);
+    userTable.innerHTML = "";
+    data.forEach((user) => {
+      const userData = `
+      <tr>
+        <td class="td-setting">
+          <button class="delete-btn table-btn" data-id="${user.id}">حذف</button>
+        </td>
+        <td>${user.role}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>${user.name}</td>
+      </tr>`;
+      userTable.innerHTML += userData;
+    });
 
-    // نمودار دایره‌ای
-    const pieCtx = document.getElementById("pieChart").getContext("2d");
-    new Chart(pieCtx, {
-      type: "doughnut",
-      data: {
-        labels: data[0].dashboard.reviews.labels,
-        datasets: [
-          {
-            label: "دیدگاه‌ها",
-            data: data[0].dashboard.reviews.data,
-            backgroundColor: [
-              "#3366ff",
-              "#4caf50",
-              "#f44336",
-              "#ff9800",
-              "#9c27b0",
-              "#00bcd4",
-            ],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true,
-            labels: { font: { family: "vazir", size: 14 } },
-          },
-          title: {
-            display: true,
-            text: "دیدگاه‌های کاربران",
-            font: { size: 16, family: "vazir" },
-          },
-          tooltip: {
-            bodyFont: { family: "vazir", size: 14 },
-            titleFont: { family: "vazir", size: 14 },
-          },
-        },
-      },
+    // اضافه کردن EventListener به دکمه‌های حذف
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const id = e.target.dataset.id;
+        await deleteItem(id);
+        getUserTable(); // رفرش جدول بعد از حذف
+      });
     });
   } catch (error) {
-    console.error("خطا در دریافت اطلاعات", error);
+    console.log(error);
   }
 }
 
+// حذف آیتم از json-server
+async function deleteItem(id) {
+  try {
+    await fetch(`https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table/${id}`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 //لیست منو قرار گرفتن فلش
 document.querySelectorAll("nav ul li").forEach((li) => {
   if (li.querySelector("ul")) {
@@ -162,6 +170,7 @@ document.querySelectorAll("nav ul li").forEach((li) => {
 
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
-  getFetchCards();
+  getUserTable();
   manageAuth();
+  checkAuth();
 });

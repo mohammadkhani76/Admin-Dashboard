@@ -26,8 +26,8 @@ if (desktopNav && mobileNav) {
 function manageAuth() {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("loggedUser");
-  if (token) {
-    userTitle.textContent = `${username}`;
+  if (token && username) {
+    userTitle.innerHTML = `${username}`;
     // نام کاربری
     userTitle.addEventListener("click", () => {
       userLogout.classList.toggle("hidden");
@@ -39,9 +39,9 @@ function manageAuth() {
       location.reload();
     });
   } else {
-    userTitle.addEventListener("click", () => {
-      userLogout.classList.add("hidden");
-    });
+    // اگر کاربر لاگین نیست، لینک ورود نمایش داده شود
+    userTitle.innerHTML = `<a href="./login.html">ورود</a>`;
+    userLogout.classList.add("hidden");
   }
 }
 
@@ -97,7 +97,9 @@ window.addEventListener("resize", () => {
 // ساخت کارت ها و چارت ها
 async function getFetchCards() {
   try {
-    const response = await fetch("http://localhost:3000/dashboard");
+    const response = await fetch(
+      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/dashboard"
+    );
     console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP ERROR! Status:${response.status}`);
@@ -110,11 +112,11 @@ async function getFetchCards() {
     new Chart(incomeCtx, {
       type: "line",
       data: {
-        labels: data.income.chart.labels, // محور X
+        labels: data[0].dashboard.income.chart.labels, // محور X
         datasets: [
           {
             label: "درآمد ماهیانه (تومان)",
-            data: data.income.chart.data, // محور Y
+            data: data[0].dashboard.income.chart.data, // محور Y
             borderColor: "#3366ff",
             backgroundColor: "rgba(51,102,255,0.2)",
             tension: 0.4,
@@ -156,11 +158,11 @@ async function getFetchCards() {
     new Chart(horizontalBarCtx, {
       type: "bar", // نوع بار
       data: {
-        labels: data.income.chart.labels, // ["فروردین", "اردیبهشت", ...]
+        labels: data[0].dashboard.income.chart.labels, // ["فروردین", "اردیبهشت", ...]
         datasets: [
           {
             label: "درآمد ماهیانه (تومان)",
-            data: data.income.chart.data, // [1200000, 1500000, ...]
+            data: data[0].dashboard.income.chart.data, // [1200000, 1500000, ...]
             backgroundColor: "#4caf50",
           },
         ],

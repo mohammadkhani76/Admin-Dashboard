@@ -22,31 +22,31 @@ const userTable = document.querySelector("#user-table");
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
-// بررسی نمایش پنل به کاربر
-function checkAuth() {
-  const token = localStorage.getItem("token");
-  const navbarLinks = document.querySelectorAll("nav ul li a");
+// // بررسی نمایش پنل به کاربر
+// function checkAuth() {
+//   const token = localStorage.getItem("token");
+//   // const navbarLinks = document.querySelectorAll("nav ul li a");
 
-  if (!token) {
-    // اگر کاربر لاگین نکرده
-    mainContent.innerHTML = `
-    <p class="islogin">
-  <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
-</p>`;
+//   if (!token) {
+//     // اگر کاربر لاگین نکرده
+//     mainContent.innerHTML = `
+//     <p class="islogin">
+//   <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
+// </p>`;
 
-    // غیر فعال کردن لینک‌های منو
-    navbarLinks.forEach((link) => {
-      link.classList.add("disabled");
-      link.addEventListener("click", (e) => e.preventDefault());
-    });
-  }
-}
+//     // غیر فعال کردن لینک‌های منو
+//     navbarLinks.forEach((link) => {
+//       link.classList.add("disabled");
+//       link.addEventListener("click", (e) => e.preventDefault());
+//     });
+//   }
+// }
 // --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
 function manageAuth() {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("loggedUser");
-  if (token) {
-    userTitle.textContent = `${username}`;
+  if (token && username) {
+    userTitle.innerHTML = `${username}`;
     // نام کاربری
     userTitle.addEventListener("click", () => {
       userLogout.classList.toggle("hidden");
@@ -58,9 +58,9 @@ function manageAuth() {
       location.reload();
     });
   } else {
-    userTitle.addEventListener("click", () => {
-      userLogout.classList.add("hidden");
-    });
+    // اگر کاربر لاگین نیست، لینک ورود نمایش داده شود
+    userTitle.innerHTML = `<a href="./login.html">ورود</a>`;
+    userLogout.classList.add("hidden");
   }
 }
 
@@ -121,7 +121,9 @@ window.addEventListener("click", (e) => {
 // ساخت کارت ها و چارت ها
 async function getFetchCards() {
   try {
-    const response = await fetch("http://localhost:3000/dashboard");
+    const response = await fetch(
+      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/dashboard"
+    );
     console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP ERROR! Status:${response.status}`);
@@ -129,7 +131,7 @@ async function getFetchCards() {
     const data = await response.json();
     console.log(data);
     cardsContainer.innerHTML = "";
-    data.cards.forEach((card) => {
+    data[0].dashboard.cards.forEach((card) => {
       const div = document.createElement("div");
       div.classList.add("card");
       // شرط رنگ بر اساس درصد
@@ -164,11 +166,11 @@ async function getFetchCards() {
     new Chart(barCtx, {
       type: "bar",
       data: {
-        labels: data.chart.labels,
+        labels: data[0].dashboard.chart.labels,
         datasets: [
           {
             label: "سفارش‌ها",
-            data: data.chart.data,
+            data: data[0].dashboard.chart.data,
             backgroundColor: "#3366ff",
           },
         ],
@@ -209,11 +211,11 @@ async function getFetchCards() {
     new Chart(pieCtx, {
       type: "doughnut",
       data: {
-        labels: data.reviews.labels,
+        labels: data[0].dashboard.reviews.labels,
         datasets: [
           {
             label: "دیدگاه‌ها",
-            data: data.reviews.data,
+            data: data[0].dashboard.reviews.data,
             backgroundColor: [
               "#3366ff",
               "#4caf50",
@@ -251,11 +253,11 @@ async function getFetchCards() {
     new Chart(incomeCtx, {
       type: "line",
       data: {
-        labels: data.income.chart.labels, // محور X
+        labels: data[0].dashboard.income.chart.labels, // محور X
         datasets: [
           {
             label: "درآمد ماهیانه (تومان)",
-            data: data.income.chart.data, // محور Y
+            data: data[0].dashboard.income.chart.data, // محور Y
             borderColor: "#3366ff",
             backgroundColor: "rgba(51,102,255,0.2)",
             tension: 0.4,
@@ -297,11 +299,11 @@ async function getFetchCards() {
     new Chart(horizontalBarCtx, {
       type: "bar", // نوع بار
       data: {
-        labels: data.income.chart.labels, // ["فروردین", "اردیبهشت", ...]
+        labels: data[0].dashboard.income.chart.labels, // ["فروردین", "اردیبهشت", ...]
         datasets: [
           {
             label: "درآمد ماهیانه (تومان)",
-            data: data.income.chart.data, // [1200000, 1500000, ...]
+            data: data[0].dashboard.income.chart.data, // [1200000, 1500000, ...]
             backgroundColor: "#4caf50",
           },
         ],
@@ -349,7 +351,9 @@ async function getFetchCards() {
 //  ساخت جدول کاربران
 async function renderUserTable() {
   try {
-    const response = await fetch("http://localhost:3000/table");
+    const response = await fetch(
+      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table"
+    );
     console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP ERROR! Status:${response.status}`);
@@ -381,6 +385,6 @@ document.querySelectorAll("nav ul li").forEach((li) => {
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
   getFetchCards();
-  checkAuth();
+  // checkAuth();
   manageAuth();
 });
