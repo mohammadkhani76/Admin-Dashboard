@@ -8,13 +8,15 @@
     <title>داشبورد</title>
   </head>
   <body>
-    <!-- هدر بالای صفحه -->
+    <!-- ===== هدر بالای صفحه ===== -->
     <header>
+      <!-- بخش سرچ -->
       <div class="search-section">
         <form>
           <input type="text" name="search" id="" placeholder="...جستجو" />
 
           <button type="button">
+            <!-- آیکن جستجو -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -32,10 +34,10 @@
           </button>
         </form>
       </div>
-      <!-- لوگو و اطلاعات کاربر -->
 
+      <!-- لوگو و پروفایل کاربر -->
       <div class="logo-section">
-        <!-- آیکن منو برای موبایل -->
+        <!-- دکمه منوی همبرگری (برای موبایل و تبلت) -->
         <div class="nav-burger" id="navbar-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +54,12 @@
             />
           </svg>
         </div>
+
+        <!-- اطلاعات کاربر -->
         <div class="logo-container">
           <p class="user-title" id="user-title"></p>
+
+          <!-- آیکن کاربر -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -68,6 +74,8 @@
               d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
           </svg>
+
+          <!-- منوی خروج کاربر -->
           <div class="user-logout hidden" id="user-logout">
             <button id="logout-button">
               <svg
@@ -90,14 +98,15 @@
         </div>
       </div>
     </header>
-    <!-- سایدبار / main -->
+
+    <!-- ===== بخش اصلی صفحه (layout) ===== -->
     <div class="layout">
-      <!-- main -->
+      <!-- ===== محتوای اصلی ===== -->
       <main class="main" id="main-content">
         <!-- کارت ها -->
 
         <section class="cards" id="cards">
-          <!-- نمایش کارت ها -->
+          <!-- نمایش کارت ها بصورت داینامیک از js-->
         </section>
 
         <!-- چارت تعداد سفارش ها -->
@@ -126,7 +135,7 @@
                 </tr>
               </thead>
               <tbody id="user-table">
-                <!-- نمایش کاربران -->
+                <!-- نمایش کاربران بصورت داینامیک-->
               </tbody>
             </table>
           </div>
@@ -148,8 +157,7 @@
         </section>
       </main>
 
-      <!-- سایدبار -->
-      <!-- دسکتاپ -->
+      <!-- ===== سایدبار دسکتاپ ===== -->
       <aside class="sidebar" id="desktop-nav">
         <!-- هدر سایدبار -->
         <div class="sidebar-title">
@@ -169,9 +177,9 @@
           </svg>
           <p>داشبورد کاربر</p>
         </div>
-        <!-- لیست سایدبار -->
+        <!-- منوهای سایدبار -->
         <nav>
-          <!-- >صفحات مدیریت -->
+          <!-- گروه اول: صفحات مدیریت -->
           <ul>
             <li class="section-title">صفحات مدیریت</li>
             <li>
@@ -254,7 +262,7 @@
             </li>
           </ul>
 
-          <!-- (Analytics / Charts) بخش تحلیلی و نمودار -->
+          <!-- گروه دوم: نمودارها -->
           <ul>
             <li class="section-title">
               (Analytics / Charts) بخش تحلیلی و نمودار
@@ -311,7 +319,7 @@
             </li>
           </ul>
 
-          <!-- (Settings) بخش تنظیمات -->
+          <!-- گروه سوم: تنظیمات -->
           <ul>
             <li class="section-title">(Settings) بخش تنظیمات</li>
             <li>
@@ -342,11 +350,11 @@
         </nav>
       </aside>
 
-      <!-- موبایل -->
-      <!-- overlay -->
+      <!-- ===== منوی موبایل ===== -->
+      <!-- overlay برای تار کردن پس‌زمینه -->
       <div id="mobile-overlay">
         <aside class="sidebar-nav" id="mobile-nav">
-          <!-- هدر سایدبار -->
+          <!-- هدر منوی موبایل -->
           <div class="sidebar-title" id="sidebar-close">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -364,13 +372,14 @@
             </svg>
             <p>داشبورد کاربر</p>
           </div>
-          <nav></nav>
-          <!-- تکرار منو دسکتاپ -->
+
+          <nav><!--  منوی دسکتاپ به صورت داینامیک  --></nav>
         </aside>
       </div>
     </div>
-    <!-- Chart.js CDN -->
+    <!-- ===== لود کتابخونه چارت ===== -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- اسکریپت اصلی -->
     <script src="js/script.js"></script>
   </body>
 </html>

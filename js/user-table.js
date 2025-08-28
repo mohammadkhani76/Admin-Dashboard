@@ -1,31 +1,24 @@
 const navbarBtn = document.querySelector("#navbar-btn");
 const desktopNav = document.querySelector("#desktop-nav nav");
 const mobileNav = document.querySelector("#mobile-nav nav");
-// سایدبار
 const sidebarDesktop = document.querySelector(".sidebar");
 const sidebarMobile = document.querySelector(".sidebar-nav");
 const mainContent = document.querySelector(".main");
 const sidebarMobileClose = document.querySelector("#sidebar-close svg");
 const overlay = document.querySelector("#mobile-overlay");
-// پروفایل
 const userTitle = document.querySelector("#user-title");
 const userLogout = document.querySelector("#user-logout");
 const logoutButton = document.querySelector("#logout-button");
-
-// car
 const cardsContainer = document.querySelector("#cards");
-
-// table
 const userTable = document.querySelector("#user-table");
 
-// ---------------- کپی کردن منو ----------------
+// همگام‌سازی منو دسکتاپ و موبایل
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
 // بررسی نمایش پنل به کاربر
 function checkAuth() {
   const token = localStorage.getItem("token");
-  // const navbarLinks = document.querySelectorAll("nav ul li a");
 
   if (!token) {
     // اگر کاربر لاگین نکرده
@@ -33,11 +26,6 @@ function checkAuth() {
     <p class="islogin">
   <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
 </p>`;
-    // غیر فعال کردن لینک‌های منو
-    // navbarLinks.forEach((link) => {
-    //   link.classList.add("disabled");
-    //   link.addEventListener("click", (e) => e.preventDefault());
-    // });
   }
 }
 // --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
@@ -45,8 +33,9 @@ function manageAuth() {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("loggedUser");
   if (token && username) {
+    // نمایش نام کاربر
     userTitle.innerHTML = `${username}`;
-    // نام کاربری
+    // باز و بسته کردن منوی خروج
     userTitle.addEventListener("click", () => {
       userLogout.classList.toggle("hidden");
     });
@@ -54,7 +43,7 @@ function manageAuth() {
     logoutButton.addEventListener("click", () => {
       localStorage.removeItem("token");
       localStorage.removeItem("loggedUser");
-      location.reload();
+      location.reload(); // رفرش صفحه پس از خروج
     });
   } else {
     // اگر کاربر لاگین نیست، لینک ورود نمایش داده شود
@@ -63,55 +52,41 @@ function manageAuth() {
   }
 }
 
-// کلیک روی دکمه منو
+// باز و بسته کردن منو
 navbarBtn.addEventListener("click", () => {
-  if (window.innerWidth <= 800) {
-    // موبایل
-    sidebarDesktop.classList.add("desktophidden");
-    mainContent.classList.add("full");
-    sidebarMobile.classList.remove("mobilehidden");
-    overlay.classList.add("show");
-  } else {
-    // دسکتاپ
-    sidebarDesktop.classList.toggle("desktophidden");
+  if (window.innerWidth > 800) {
+    // حالت دسکتاپ: نمایش/مخفی کردن سایدبار
+    sidebarDesktop.classList.toggle("hidden"); // مخفی/نمایش منوی دسکتاپ
     mainContent.classList.toggle("full");
-    sidebarMobile.classList.add("mobilehidden");
-    overlay.classList.remove("show");
+  } else {
+    // حالت موبایل: نمایش سایدبار و overlay
+    sidebarMobile.classList.add("active");
+    overlay.classList.add("show");
   }
 });
 
-// کلیک روی دکمه بستن موبایل
+// بستن سایدبار موبایل با دکمه
 if (sidebarMobileClose) {
   sidebarMobileClose.addEventListener("click", () => {
-    sidebarMobile.classList.add("mobilehidden");
+    sidebarMobile.classList.remove("active");
     overlay.classList.remove("show");
   });
 }
 
-// وقتی روی overlay کلیک کردیم، منو رو ببندیم
+// بستن سایدبار موبایل با کلیک روی overlay
 overlay.addEventListener("click", (e) => {
   if (!sidebarMobile.contains(e.target)) {
-    sidebarMobile.classList.add("mobilehidden");
+    sidebarMobile.classList.remove("active");
     overlay.classList.remove("show");
   }
 });
 
-// وقتی صفحه resize شد
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 800) {
-    // دسکتاپ
-    sidebarDesktop.classList.remove("desktophidden");
-    sidebarMobile.classList.add("mobilehidden");
-    mainContent.classList.remove("full");
-    overlay.classList.remove("show"); // مخفی کردن overlay در دسکتاپ
-  } else {
-    // موبایل
-    sidebarDesktop.classList.add("desktophidden");
-    sidebarMobile.classList.add("mobilehidden");
-    mainContent.classList.remove("full");
+// مخفی کردن منوی خروج هنگام کلیک بیرون
+window.addEventListener("click", (e) => {
+  if (!userLogout.contains(e.target) && !userTitle.contains(e.target)) {
+    userLogout.classList.add("hidden");
   }
 });
-
 //  ساخت جدول کاربران
 // ساخت جدول کاربران
 async function getUserTable() {

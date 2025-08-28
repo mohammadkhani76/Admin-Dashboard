@@ -1,27 +1,29 @@
-@font-face {
-  font-family: "vazir";
-  src: url(../font/Vazir-Bold.woff), url(../font/Vazir-Bold.woff2);
-}
+@import url(root.css);
+
+/* ===================== تنظیمات پایه ===================== */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
+/* ===================== بدنه صفحه ===================== */
 body {
   display: flex;
   flex-direction: column;
-  background: #f0f2f8;
-  font-family: "vazir";
+  background: var(--color-light-bg);
+  font-family: var(--font-primary);
 }
+/* ===================== هدر ===================== */
 header {
-  background: #3366ff;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-white);
   padding: 10px 20px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; /* دو ستون: جستجو و لوگو/کاربر */
   width: 100%;
 }
+/* ===================== بخش لوگو ===================== */
+
 .logo-section {
   display: flex;
   justify-content: space-evenly;
@@ -39,32 +41,34 @@ header {
   cursor: pointer;
 }
 .user-title a {
-  color: white;
+  color: var(--color-white);
   text-decoration: none;
 }
 .user-icon {
   width: 40px;
   height: 40px;
 }
+/* منوی خروج کاربر */
 .user-logout {
   position: absolute;
   top: 100%;
   right: 0%;
-  background-color: #e3f2fc;
+  background-color: var(--color-logout-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 100px;
   z-index: 1;
   padding: 0.5rem;
-  border: 1px solid rgba(58, 61, 66, 0.06);
+  border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  color: white;
+  box-shadow: var(--shadow-dark);
+  color: var(--color-white);
 }
 .user-logout.hidden {
-  display: none;
+  display: none; /* مخفی بودن پیش‌فرض منوی خروج */
 }
+/* استایل دکمه خروج */
 .user-logout button {
   background-color: transparent;
   padding: 10px 20px;
@@ -74,7 +78,7 @@ header {
   justify-content: center;
   gap: 10px;
   font-weight: 600;
-  color: #3366ff;
+  color: var(--color-primary);
 }
 .user-logout > button > svg {
   width: 24px;
@@ -82,10 +86,10 @@ header {
   stroke: currentColor;
 }
 .user-logout > button:hover {
-  color: #c90000;
+  color: var(--color-danger);
   cursor: pointer;
 }
-/* logo */
+/* ===================== لوگو ===================== */
 .logo-img {
   display: flex;
   align-items: center;
@@ -94,7 +98,7 @@ header {
 }
 
 .logo-img p {
-  color: white;
+  color: var(--color-white);
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -102,7 +106,7 @@ header {
   width: 40px;
   height: 40px;
 }
-/* nav */
+/* ===================== منو (برگر) ===================== */
 .nav-burger {
   cursor: pointer;
   width: 40px;
@@ -114,26 +118,26 @@ header {
   padding: 4px;
 }
 .nav-burger:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background-color: var(--color-hover);
   backdrop-filter: blur(10px);
 }
 .nav-burger svg {
   width: 100%;
   height: 100%;
-  color: white;
+  color: var(--color-white);
 }
-/* search */
+/* ===================== بخش جستجو ===================== */
 .search-section {
   display: flex;
   align-items: center;
 }
 form {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-dark-secondary);
   transition: box-shadow 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-hover);
   backdrop-filter: blur(10px);
   border-radius: 8px;
   overflow: auto;
@@ -152,7 +156,7 @@ form {
 .search-section button svg {
   width: 100%;
   height: 100%;
-  color: white;
+  color: var(--color-white);
 }
 .search-section input {
   width: 150px;
@@ -165,25 +169,25 @@ form {
   outline: none;
 }
 .search-section input::placeholder {
-  color: rgb(245, 245, 245);
+  color: var(--color-input-placeholder);
   font-size: 1.2rem;
 }
 .search-section input:focus {
   width: 300px;
   transition: width 300ms ease-in-out;
 }
-/* لایه اصلی: سایدبار + مین */
+/* ===================== لایه اصلی (سایدبار + مین) ===================== */
 .layout {
   display: flex;
   width: 100%;
   overflow: hidden;
 }
 
-/* سایدبار */
+/* ===================== سایدبار ===================== */
 
 /* موبایل */
 .sidebar-nav {
-  background-color: white;
+  background-color: var(--color-white);
   padding: 20px;
   height: 100%;
   width: 70%;
@@ -198,8 +202,7 @@ form {
   right: 0;
   top: 0;
   z-index: 1000;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  box-shadow: var(--shadow-heavy);
 }
 
 .sidebar-nav.active {
@@ -214,7 +217,7 @@ form {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-overlay);
   display: none; /* به طور پیش‌فرض مخفی */
   z-index: 998;
   opacity: 0;
@@ -229,7 +232,7 @@ form {
 
 /* دسکتاپ */
 .sidebar {
-  background: white;
+  background: var(--color-white);
   padding: 20px;
   width: 25%;
   display: flex;
@@ -238,8 +241,7 @@ form {
   gap: 20px;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  box-shadow: var(--shadow-heavy);
 }
 
 .sidebar.hidden {
@@ -254,11 +256,12 @@ form {
   width: 100%;
   font-size: 1.4rem;
   font-weight: bold;
-  color: #3366ff;
+  color: var(--color-primary);
 }
 .sidebar-title svg {
   display: none;
 }
+/* منو ناوبری */
 nav {
   width: 100%;
   display: flex;
@@ -270,6 +273,7 @@ nav svg {
   height: 20px;
 }
 
+/* لیست های منو */
 nav ul {
   display: flex;
   align-items: center;
@@ -280,7 +284,7 @@ nav ul {
   padding: 10px;
 }
 nav ul:not(:last-child) {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-black);
 }
 nav ul li {
   display: flex;
@@ -292,7 +296,7 @@ nav ul li {
   flex-direction: column;
 }
 nav ul li:not(:first-child):hover {
-  background-color: #e3f2fc;
+  background-color: var(--color-logout-bg);
   border-radius: 5px;
 }
 nav ul li a {
@@ -302,12 +306,12 @@ nav ul li a {
   justify-content: center;
   gap: 10px;
   padding: 10px;
-  color: black;
+  color: var(--color-black);
   position: relative;
   padding-right: 20px;
 }
 
-/* فلش */
+/*  فلش لیست منو*/
 nav ul li.dropdown > a {
   display: flex;
   align-items: center;
@@ -326,14 +330,14 @@ nav ul li.dropdown:hover > a::before {
   transform: rotate(180deg);
 }
 nav ul li a:hover {
-  color: #3366ff;
+  color: var(--color-primary);
 }
 .section-title {
-  color: #3366ff;
+  color: var(--color-primary);
   font-weight: 800;
 }
 
-/* دراپ */
+/* dropdown */
 nav > ul > li > ul {
   display: none;
   padding-right: 20px;
@@ -354,12 +358,12 @@ nav > ul > li > ul > li {
 
 nav ul li ul li:hover {
   background: inherit;
-  color: #3366ff;
+  color: var(--color-primary);
 }
 
-/* main */
+/* ================ main بخش اصلی صفحه ===================*/
 .main {
-  background-color: #f0f2f8;
+  background-color: var(--color-light-bg);
   width: 75%;
   display: flex;
   flex-direction: column;
@@ -384,13 +388,14 @@ nav ul li ul li:hover {
   cursor: pointer;
 }
 .islogin a strong:hover {
-  color: crimson;
+  color: var(--color-dangerdark);
 }
 .islogin a strong {
-  color: red;
+  color: var(--color-danger);
 }
+/* ===================== کارت ها ===================== */
 .cards {
-  background-color: #f0f2f8;
+  background-color: var(--color-light-bg);
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -401,10 +406,9 @@ nav ul li ul li:hover {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-white);
 
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: var(--shadow-medium);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -425,10 +429,10 @@ nav ul li ul li:hover {
 }
 
 .orders-count.positive {
-  color: green;
+  color: var(--color-secondary);
 }
 .orders-count.negative {
-  color: red;
+  color: var(--color-danger);
 }
 .status {
   display: flex;
@@ -444,7 +448,7 @@ nav ul li ul li:hover {
   padding: 10px;
   border-radius: 0px 0px 8px 8px;
   text-align: center;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .card-percentage {
@@ -455,13 +459,13 @@ nav ul li ul li:hover {
 }
 /* رنگ های مثبت و منفی برای درصد */
 .card-stats.positive {
-  background-color: #4caf50;
+  background-color: var(--color-secondary);
 }
 
 .card-stats.negative {
-  background-color: #f44336;
+  background-color: var(--color-danger);
 }
-/* چارت */
+/* ===================== چارت ===================== */
 .chart {
   width: 100%;
   display: flex;
@@ -484,8 +488,7 @@ nav ul li ul li:hover {
   gap: 10px;
   padding: 30px;
   cursor: pointer;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: var(--shadow-medium);
   border-radius: 10px;
 }
 .bar-wrapper canvas,
@@ -493,7 +496,7 @@ nav ul li ul li:hover {
   width: 100%;
   height: 100%;
 }
-/* جدول */
+/* ===================== جدول ===================== */
 .table-section {
   display: flex;
   align-items: center;
@@ -503,7 +506,7 @@ nav ul li ul li:hover {
   padding: 10px;
 }
 .table-section h2 {
-  color: #666666;
+  color: var(--color-grey);
   font-size: 1rem;
 }
 
@@ -513,36 +516,35 @@ nav ul li ul li:hover {
   overflow-x: auto;
 }
 .table-section table {
-  background-color: white;
+  background-color: var(--color-white);
   min-width: 50%;
   border-radius: 10px;
   margin: 0 auto;
   overflow: hidden;
   width: 70%;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: var(--shadow-dark-primary);
   border-collapse: collapse;
 }
 th {
-  background-color: #3366ff;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
 td {
   cursor: pointer;
 }
 tbody tr:hover {
-  background-color: #e3f2fc;
+  background-color: var(--color-logout-bg);
 }
 
 th,
 td {
-  border-bottom: 1px solid blue;
-
+  border-bottom: 1px solid var(--color-primary);
   padding: 8px;
   text-align: center;
   white-space: nowrap;
 }
 
-/* نمودار خطی */
+/* ======================== نمودار خطی =====================*/
 .income-chart {
   display: flex;
   justify-content: center;
@@ -558,8 +560,7 @@ td {
   justify-content: center;
   gap: 10px;
   padding: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: var(--shadow-medium);
   border-radius: 10px;
   cursor: pointer;
 }
@@ -572,14 +573,14 @@ td {
   justify-content: center;
   gap: 10px;
   padding: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: var(--shadow-medium);
   border-radius: 10px;
   cursor: pointer;
 }
 .horizontal-bar-wrapper p {
   font-size: 1rem;
 }
+/* ==================== دکمه جدول =================*/
 /* دکمه صفحه کاربران */
 .td-setting {
   display: flex;
@@ -591,21 +592,21 @@ td {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  font-family: "vazir";
+  font-family: var(--font-primary);
 }
 .table-btn:hover {
   transform: scale(0.98);
 }
 .delete-btn {
-  background-color: red;
+  background-color: var(--color-danger);
 }
-.edit-btn {
-  background-color: green;
-}
+
+/* ===================== ریسپانسیو ===================== */
+/* سایز1000 */
 @media screen and (max-width: 1000px) {
   .chart,
   .income-chart {
@@ -620,6 +621,7 @@ td {
   }
 }
 
+/* سایز800 */
 @media screen and (max-width: 800px) {
   .sidebar {
     display: none;
@@ -664,6 +666,7 @@ td {
   }
 }
 
+/* سایز500 */
 @media screen and (max-width: 500px) {
   header {
     grid-template-columns: 1fr;
