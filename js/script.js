@@ -48,25 +48,21 @@ function manageAuth() {
 
 // کلیک روی دکمه منو
 navbarBtn.addEventListener("click", () => {
-  if (window.innerWidth <= 800) {
-    // موبایل
-    sidebarDesktop.classList.add("desktophidden");
-    mainContent.classList.add("full");
-    sidebarMobile.classList.remove("mobilehidden");
-    overlay.classList.add("show");
-  } else {
-    // دسکتاپ
-    sidebarDesktop.classList.toggle("desktophidden");
+  if (window.innerWidth > 800) {
+    // حالت دسکتاپ
+    sidebarDesktop.classList.toggle("hidden"); // مخفی/نمایش منوی دسکتاپ
     mainContent.classList.toggle("full");
-    sidebarMobile.classList.add("mobilehidden");
-    overlay.classList.remove("show");
+  } else {
+    // حالت موبایل
+    sidebarMobile.classList.add("active");
+    overlay.classList.add("show");
   }
 });
 
 // کلیک روی دکمه بستن موبایل
 if (sidebarMobileClose) {
   sidebarMobileClose.addEventListener("click", () => {
-    sidebarMobile.classList.add("mobilehidden");
+    sidebarMobile.classList.remove("active");
     overlay.classList.remove("show");
   });
 }
@@ -74,40 +70,8 @@ if (sidebarMobileClose) {
 // وقتی روی overlay کلیک کردیم، منو رو ببندیم
 overlay.addEventListener("click", (e) => {
   if (!sidebarMobile.contains(e.target)) {
-    sidebarMobile.classList.add("mobilehidden");
+    sidebarMobile.classList.remove("active");
     overlay.classList.remove("show");
-  }
-});
-
-// وقتی صفحه resize شد
-// window.addEventListener("resize", () => {
-//   if (window.innerWidth > 800) {
-//     // دسکتاپ
-//     sidebarDesktop.classList.remove("desktophidden");
-//     sidebarMobile.classList.add("mobilehidden");
-//     mainContent.classList.remove("full");
-//     overlay.classList.remove("show"); // مخفی کردن overlay در دسکتاپ
-//   } else {
-//     // موبایل
-//     sidebarDesktop.classList.add("desktophidden");
-//     sidebarMobile.classList.add("mobilehidden");
-//     mainContent.classList.remove("full");
-//   }
-// });
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 800) {
-    sidebarDesktop.classList.remove("desktophidden");
-    sidebarMobile.classList.add("mobilehidden");
-    mainContent.classList.remove("full");
-    overlay.classList.remove("show");
-  } else {
-    sidebarDesktop.classList.add("desktophidden");
-    // فقط اگر overlay فعال نیست، منو موبایل را مخفی کن
-    if (!overlay.classList.contains("show")) {
-      sidebarMobile.classList.add("mobilehidden");
-    }
-    mainContent.classList.remove("full");
   }
 });
 

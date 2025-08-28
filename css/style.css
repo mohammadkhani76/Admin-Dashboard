@@ -11,16 +11,13 @@
 body {
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
   background: #f0f2f8;
   font-family: "vazir";
-  /* overflow: hidden; */
 }
 header {
   background: #3366ff;
   color: white;
   padding: 10px 20px;
-  /* text-align: center; */
   display: grid;
   grid-template-columns: 2fr 1fr;
   width: 100%;
@@ -44,7 +41,6 @@ header {
 .user-title a {
   color: white;
   text-decoration: none;
-  /* cursor: pointer; */
 }
 .user-icon {
   width: 40px;
@@ -132,7 +128,7 @@ header {
   align-items: center;
 }
 form {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* سایه ملایم */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease;
   display: flex;
   align-items: center;
@@ -181,17 +177,17 @@ form {
   display: flex;
   width: 100%;
   overflow: hidden;
-  /* height: 100vh; */
 }
 
 /* سایدبار */
+
 /* موبایل */
 .sidebar-nav {
   background-color: white;
   padding: 20px;
   height: 100%;
   width: 70%;
-  display: flex;
+  display: none; /* به طور پیش‌فرض مخفی */
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -201,28 +197,31 @@ form {
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 1000;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
-.sidebar-nav.mobilehidden {
-  display: none;
+
+.sidebar-nav.active {
+  display: flex; /* فعال شدن سایدبار*/
 }
-/* overlay مخفی به صورت پیش‌فرض */
-/* برای Overlay */
+
+/*  Overlay */
 #mobile-overlay {
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* بک‌گراند شفاف */
+  background-color: rgba(0, 0, 0, 0.5);
   display: none; /* به طور پیش‌فرض مخفی */
-  z-index: 998; /* پشت منو موبایل */
-  opacity: 0; /* برای انیمیشن محو */
-  transition: opacity 0.3s ease; /* انیمیشن محو */
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* وقتی overlay فعال شد */
+/*  overlay فعال شد */
 #mobile-overlay.show {
   display: block;
   opacity: 1;
@@ -232,7 +231,6 @@ form {
 .sidebar {
   background: white;
   padding: 20px;
-  /* height: 100vh; */
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -240,11 +238,11 @@ form {
   gap: 20px;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
-
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
-.sidebar.desktophidden {
+
+.sidebar.hidden {
   display: none;
 }
 
@@ -313,7 +311,7 @@ nav ul li a {
 nav ul li.dropdown > a {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* متن سمت راست، فلش سمت چپ */
+  justify-content: flex-end;
   padding: 10px;
   width: 100%;
 }
@@ -457,11 +455,11 @@ nav ul li ul li:hover {
 }
 /* رنگ های مثبت و منفی برای درصد */
 .card-stats.positive {
-  background-color: #4caf50; /* سبز */
+  background-color: #4caf50;
 }
 
 .card-stats.negative {
-  background-color: #f44336; /* قرمز */
+  background-color: #f44336;
 }
 /* چارت */
 .chart {
@@ -584,9 +582,9 @@ td {
 }
 /* دکمه صفحه کاربران */
 .td-setting {
-  display: flex; /* کنار هم */
-  justify-content: center; /* وسط‌چین افقی */
-  align-items: center; /* وسط‌چین عمودی */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
 }
 .table-btn {
@@ -609,13 +607,6 @@ td {
   background-color: green;
 }
 @media screen and (max-width: 1000px) {
-  .sidebar {
-    width: 40%;
-  }
-  .main {
-    width: 60%;
-  }
-
   .chart,
   .income-chart {
     flex-direction: column;
@@ -630,6 +621,20 @@ td {
 }
 
 @media screen and (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar-title {
+    justify-content: space-between;
+  }
+
+  .sidebar-title svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+
   .user-icon {
     display: none;
   }
@@ -651,16 +656,6 @@ td {
     width: 80%;
   }
 
-  .sidebar-title {
-    justify-content: space-between;
-  }
-
-  .sidebar-title svg {
-    display: block;
-    width: 30px;
-    height: 30px;
-  }
-
   .main {
     width: 100%;
   }
@@ -668,10 +663,8 @@ td {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media screen and (max-width: 500px) {
-  .cards {
-    grid-template-columns: repeat(1, 1fr);
-  }
   header {
     grid-template-columns: 1fr;
     width: 100%;
@@ -679,9 +672,11 @@ td {
   }
   .logo-section {
     justify-content: flex-start;
-    /* flex-direction: row-reverse; */
   }
   .search-section {
     order: 2;
+  }
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
