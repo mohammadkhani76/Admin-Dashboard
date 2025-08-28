@@ -33,7 +33,6 @@ function checkAuth() {
     <p class="islogin">
   <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
 </p>`;
-
     // غیر فعال کردن لینک‌های منو
     // navbarLinks.forEach((link) => {
     //   link.classList.add("disabled");

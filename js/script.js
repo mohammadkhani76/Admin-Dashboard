@@ -22,25 +22,7 @@ const userTable = document.querySelector("#user-table");
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
 }
-// // بررسی نمایش پنل به کاربر
-// function checkAuth() {
-//   const token = localStorage.getItem("token");
-//   // const navbarLinks = document.querySelectorAll("nav ul li a");
 
-//   if (!token) {
-//     // اگر کاربر لاگین نکرده
-//     mainContent.innerHTML = `
-//     <p class="islogin">
-//   <a href="./login.html">.جهت ورود به پنل <strong> کلیک </strong>نمایید</a>
-// </p>`;
-
-//     // غیر فعال کردن لینک‌های منو
-//     navbarLinks.forEach((link) => {
-//       link.classList.add("disabled");
-//       link.addEventListener("click", (e) => e.preventDefault());
-//     });
-//   }
-// }
 // --------- بررسی وضعیت ورود کاربر و نمایش منو -------------
 function manageAuth() {
   const token = localStorage.getItem("token");
@@ -98,20 +80,37 @@ overlay.addEventListener("click", (e) => {
 });
 
 // وقتی صفحه resize شد
+// window.addEventListener("resize", () => {
+//   if (window.innerWidth > 800) {
+//     // دسکتاپ
+//     sidebarDesktop.classList.remove("desktophidden");
+//     sidebarMobile.classList.add("mobilehidden");
+//     mainContent.classList.remove("full");
+//     overlay.classList.remove("show"); // مخفی کردن overlay در دسکتاپ
+//   } else {
+//     // موبایل
+//     sidebarDesktop.classList.add("desktophidden");
+//     sidebarMobile.classList.add("mobilehidden");
+//     mainContent.classList.remove("full");
+//   }
+// });
+
 window.addEventListener("resize", () => {
   if (window.innerWidth > 800) {
-    // دسکتاپ
     sidebarDesktop.classList.remove("desktophidden");
     sidebarMobile.classList.add("mobilehidden");
     mainContent.classList.remove("full");
-    overlay.classList.remove("show"); // مخفی کردن overlay در دسکتاپ
+    overlay.classList.remove("show");
   } else {
-    // موبایل
     sidebarDesktop.classList.add("desktophidden");
-    sidebarMobile.classList.add("mobilehidden");
+    // فقط اگر overlay فعال نیست، منو موبایل را مخفی کن
+    if (!overlay.classList.contains("show")) {
+      sidebarMobile.classList.add("mobilehidden");
+    }
     mainContent.classList.remove("full");
   }
 });
+
 // عدم نمایش دکمه خروج
 window.addEventListener("click", (e) => {
   if (!userLogout.contains(e.target) && !userTitle.contains(e.target)) {
@@ -385,6 +384,5 @@ document.querySelectorAll("nav ul li").forEach((li) => {
 // اجرای اولیه
 window.addEventListener("DOMContentLoaded", () => {
   getFetchCards();
-  // checkAuth();
   manageAuth();
 });
