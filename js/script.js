@@ -77,13 +77,14 @@ window.addEventListener("click", (e) => {
     userLogout.classList.add("hidden");
   }
 });
+
 // دریافت داده‌ها و ساخت کارت‌ها و چارت‌ها
 async function getFetchCards() {
   try {
     const response = await fetch(
       "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/dashboard"
     );
-    console.log(response);
+    // console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP ERROR! Status:${response.status}`);
     }
@@ -109,15 +110,15 @@ async function getFetchCards() {
       const ordersCountColor = isPositive ? "positive" : "negative"; // تعیین رنگ مقدار count
       // جایگذاری کارت ها
       div.innerHTML = `
-        <h3>${card.title} </h3>
-            <p class="orders-count ${ordersCountColor}" id="orders-count">${card.count}</p>
-        <div class="card-stats ${percentageClass}">
-              <p class="card-percentage" id="orders-percentage">${card.percentage}%</p>
-        <div class="status">
-              <p class="card-status" id="orders-status">${card.status}</p>
-              ${arrow}
-        </div>
-        </div>`;
+      <h3>${card.title}</h3>
+<p class="orders-count ${ordersCountColor}" id="orders-count">${card.count}</p>
+<div class="card-stats ${percentageClass}">
+  <p class="card-percentage" id="orders-percentage">${card.percentage}%</p>
+  <div class="status">
+    <p class="card-status" id="orders-status">${card.status}</p>
+    ${arrow}
+  </div>
+</div>`;
       cardsContainer.appendChild(div);
     });
 
@@ -207,7 +208,10 @@ async function getFetchCards() {
         },
       },
     });
+
+    // نمایش لیست کاربران
     renderUserTable();
+
     //  نمودار خطی چارت درامد
     const incomeCtx = document.getElementById("lineChart").getContext("2d");
     new Chart(incomeCtx, {
