@@ -113,12 +113,21 @@ async function getUserTable() {
     });
 
     // اضافه کردن EventListener به دکمه‌های حذف
-    document.querySelectorAll(".delete-btn").forEach((btn) => {
-      btn.addEventListener("click", async (e) => {
+    // document.querySelectorAll(".delete-btn").forEach((btn) => {
+    //   btn.addEventListener("click", async (e) => {
+    //     const id = e.target.dataset.id;
+    //     await deleteItem(id);
+    //     getUserTable(); // رفرش جدول بعد از حذف
+    //   });
+    // });
+
+    //  Event Delegation برای کل جدول
+    userTable.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("delete-btn")) {
         const id = e.target.dataset.id;
         await deleteItem(id);
-        getUserTable(); // رفرش جدول بعد از حذف
-      });
+        getUserTable(); // رفرش جدول
+      }
     });
   } catch (error) {
     console.log(error);
