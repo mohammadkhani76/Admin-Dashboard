@@ -11,7 +11,7 @@
     <!-- هدر بالای صفحه -->
     <header>
       <div class="search-section">
-        <form>
+        <form class="form">
           <input type="text" name="search" id="" placeholder="...جستجو" />
 
           <button type="button">
@@ -94,6 +94,58 @@
     <div class="layout">
       <!-- main -->
       <main class="main" id="main-content">
+        <!-- ایجاد کاربر جدید -->
+        <section class="section-adduser">
+          <h2>افزودن کاربر جدید</h2>
+          <form id="adduser-form">
+            <div>
+              <label for="name">نام و نام خانوادگی: </label
+              ><input
+                type="text"
+                id="name"
+                placeholder="نام و نام خانوادگی..."
+              />
+            </div>
+            <div>
+              <label for="phone">تلفن: </label
+              ><input type="number" id="phone" placeholder="تلفن ..." />
+            </div>
+
+            <div>
+              <label for="email"> ایمیل: </label
+              ><input type="email" id="email" placeholder=" ایمیل ..." />
+            </div>
+
+            <div>
+              <label for="role"> دسترسی: </label
+              ><select name="role" id="role">
+                <option value="">انتخاب کنید</option>
+                <option value="ادمین">ادمین</option>
+                <option value="کاربر">کاربر</option>
+              </select>
+            </div>
+            <button type="submit" id="submitBtn">افزودن +</button>
+          </form>
+        </section>
+        <!-- Modal -->
+        <div id="editModal" class="modal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>ویرایش کاربر</h3>
+            <form id="formEditUser">
+              <input type="text" id="editName" placeholder="نام" />
+              <input type="text" id="editPhone" placeholder="تلفن" />
+              <input type="email" id="editEmail" placeholder="ایمیل" />
+              <select id="editRole">
+                <option value="">انتخاب کنید</option>
+                <option value="ادمین">ادمین</option>
+                <option value="کاربر">کاربر</option>
+              </select>
+              <button type="submit">ذخیره تغییرات</button>
+            </form>
+          </div>
+        </div>
+
         <!--  جدول لیست کاربران  -->
         <section class="table-section">
           <h2>لیست کاربران</h2>

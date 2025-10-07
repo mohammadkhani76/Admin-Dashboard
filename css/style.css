@@ -12,6 +12,7 @@ body {
   flex-direction: column;
   background: var(--color-light-bg);
   font-family: var(--font-primary);
+  overflow-x: hidden;
 }
 /* ===================== هدر ===================== */
 header {
@@ -131,7 +132,7 @@ header {
   display: flex;
   align-items: center;
 }
-form {
+.form {
   box-shadow: var(--shadow-dark-secondary);
   transition: box-shadow 0.3s ease;
   display: flex;
@@ -543,6 +544,115 @@ td {
   text-align: center;
   white-space: nowrap;
 }
+/* ============فرم اضافه کردن کاربر جدید================= */
+.section-adduser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+.section-adduser > h2 {
+  color: var(--color-grey);
+  font-size: 1rem;
+}
+.section-adduser > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  direction: rtl;
+  padding: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-dark-primary);
+  border-radius: 10px;
+}
+.section-adduser > form > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+.section-adduser > form > div > label {
+  white-space: nowrap;
+}
+.section-adduser > form > div > input {
+  font-family: var(--font-primary);
+  padding: 8px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-medium);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+.section-adduser > form > div > input:focus {
+  outline: none;
+  border-color: var(--color-logout-bg);
+  caret-color: var(--color-primary1);
+}
+.section-adduser > form > div > select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  box-shadow: var(--shadow-medium);
+  border: none;
+  font-family: var(--font-primary);
+}
+.section-adduser > form > div > select:focus {
+  outline: none;
+  border-color: var(--color-logout-bg);
+  box-shadow: 0 0 5px var(--color-logout-bg);
+}
+.section-adduser > form > button {
+  font-family: var(--font-primary);
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  &:hover {
+    background-color: var(--color-primary1);
+  }
+}
+/* مدال ویرایش */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  /* padding: 20px; */
+  /* border-radius: 8px; */
+  /* width: 400px; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  direction: rtl;
+  padding: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-dark-primary);
+  border-radius: 10px;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
 
 /* ======================== نمودار خطی =====================*/
 .income-chart {
@@ -604,6 +714,9 @@ td {
 .delete-btn {
   background-color: var(--color-danger);
 }
+.edit-btn {
+  background-color: var(--color-secondary);
+}
 
 /* ===================== ریسپانسیو ===================== */
 /* سایز1000 */
@@ -647,7 +760,7 @@ td {
   .user-logout {
     left: -100%;
   }
-  form {
+  .form {
     width: 100%;
     justify-content: center;
   }
@@ -681,5 +794,12 @@ td {
   }
   .cards {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .section-adduser > form {
+    width: 100%;
+  }
+  .section-adduser > form > div {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

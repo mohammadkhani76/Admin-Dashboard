@@ -11,7 +11,19 @@ const userLogout = document.querySelector("#user-logout");
 const logoutButton = document.querySelector("#logout-button");
 const cardsContainer = document.querySelector("#cards");
 const userTable = document.querySelector("#user-table");
-
+const name = document.querySelector("#name");
+const phone = document.querySelector("#phone");
+const email = document.querySelector("#email");
+const role = document.querySelector("#role");
+const formAddUser = document.querySelector("#adduser-form");
+const submitBtn = document.querySelector("#submitBtn");
+const editModal = document.querySelector("#editModal");
+const editForm = document.querySelector("#formEditUser");
+const editName = document.querySelector("#editName");
+const editPhone = document.querySelector("#editPhone");
+const editEmail = document.querySelector("#editEmail");
+const editRole = document.querySelector("#editRole");
+let editUserId = null;
 // همگام‌سازی منو دسکتاپ و موبایل
 if (desktopNav && mobileNav) {
   mobileNav.innerHTML = desktopNav.innerHTML;
@@ -87,8 +99,8 @@ window.addEventListener("click", (e) => {
     userLogout.classList.add("hidden");
   }
 });
-//  ساخت جدول کاربران
-// ساخت جدول کاربران
+
+// ============================= ساخت جدول کاربران=============================
 async function getUserTable() {
   try {
     const response = await fetch(
@@ -102,7 +114,15 @@ async function getUserTable() {
       const userData = `
       <tr>
         <td class="td-setting">
-          <button class="delete-btn table-btn" data-id="${user.id}">حذف</button>
+          <button class="delete-btn table-btn" data-id="${
+            user.id
+          }" data-name="${user.name}">حذف</button>
+          <button class="edit-btn table-btn" data-id="${user.id}" data-name="${
+        user.name
+      }" data-phone="${user.phone}"
+          data-email="${user.email}"
+          data-role="${user.role.trim()}">ویرایش</button>
+
         </td>
         <td>${user.role}</td>
         <td>${user.email}</td>
@@ -120,21 +140,26 @@ async function getUserTable() {
     //     getUserTable(); // رفرش جدول بعد از حذف
     //   });
     // });
-
-    //  Event Delegation برای کل جدول
-    userTable.addEventListener("click", async (e) => {
-      if (e.target.classList.contains("delete-btn")) {
-        const id = e.target.dataset.id;
-        await deleteItem(id);
-        getUserTable(); // رفرش جدول
-      }
-    });
   } catch (error) {
     console.log(error);
   }
 }
 
-// حذف آیتم از json-server
+// ==============================حذف کردن کاربر=======================
+//  Event Delegation برای کل جدول
+userTable.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const id = e.target.dataset.id;
+    const name = e.target.dataset.name;
+    if (confirm(`آیا مطمئن هستید می‌خواهید  کاربر: ${name} را حذف کنید؟`)) {
+      await deleteItem(id);
+      alert(`✅ کاربر "${name}" با موفقیت حذف شد!`);
+      getUserTable(); // رفرش جدول
+    }
+  }
+});
+
+// ============================تابع delete============================
 async function deleteItem(id) {
   try {
     await fetch(`https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table/${id}`, {
@@ -144,7 +169,109 @@ async function deleteItem(id) {
     console.log(err);
   }
 }
-//لیست منو قرار گرفتن فلش
+
+// ===========================اضافه کردن کاربر=========================
+formAddUser.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = {
+    name: name.value.trim(),
+    phone: phone.value.trim(),
+    email: email.value.trim(),
+    role: role.value.trim(),
+  };
+  if (!name.value || !phone.value || !email.value || !role.value) {
+    alert("لطفاً تمام فیلدها را پر کنید!");
+    return;
+  }
+  await postItem(data);
+  formAddUser.reset();
+  getUserTable();
+});
+
+// =============================تابع post==============================
+async function postItem(data) {
+  try {
+    const response = await fetch(
+      "https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP ERROR! Status: ${response.status}`);
+    const newUser = await response.json();
+    alert(`✅ کاربر "${newUser.name}" با موفقیت اضافه شد!`);
+  } catch (error) {
+    console.log(error);
+    alert("❌ خطا در افزودن کاربر");
+  }
+}
+// =================================ویرایش کردن کاربر====================================
+userTable.addEventListener("click", (e) => {
+  if (e.target.classList.contains("edit-btn")) {
+    editUserId = e.target.dataset.id;
+
+    // پر کردن فرم modal با داده کاربر
+    editName.value = e.target.dataset.name;
+    editPhone.value = e.target.dataset.phone;
+    editEmail.value = e.target.dataset.email;
+    editRole.value = e.target.dataset.role;
+
+    // نمایش modal
+    editModal.style.display = "flex";
+  }
+});
+
+// بستن modal با کلیک روی ×
+editModal.querySelector(".close-btn").addEventListener("click", () => {
+  editModal.style.display = "none";
+});
+// ================================
+editForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = {
+    name: editName.value.trim(),
+    phone: editPhone.value.trim(),
+    email: editEmail.value.trim(),
+    role: editRole.value.trim(),
+  };
+  if (
+    !editName.value ||
+    !editPhone.value ||
+    !editEmail.value ||
+    !editRole.value
+  ) {
+    alert("لطفاً تمام فیلدها را پر کنید!");
+    return;
+  }
+
+  await putitem(editUserId, data);
+  getUserTable();
+  editForm.reset();
+  editModal.style.display = "none";
+});
+// =================================تابع PUT  ====================================
+async function putitem(editUserId, data) {
+  try {
+    const response = await fetch(
+      `https://68ac6aa37a0bbe92cbba5f17.mockapi.io/table/${editUserId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP ERROR! Status: ${response.status}`);
+    const updatedUser = await response.json();
+    alert(`✅ ویرایش کاربر "${updatedUser.name}" با موفقیت انجام شد.`);
+  } catch (error) {
+    console.log(error);
+    alert("❌ خطا در ویرایش کاربر");
+  }
+}
+
+//=====لیست منو قرار گرفتن فلش======
 document.querySelectorAll("nav ul li").forEach((li) => {
   if (li.querySelector("ul")) {
     li.classList.add("dropdown"); // فقط به اونایی که ul داخلشون هست کلاس بده
